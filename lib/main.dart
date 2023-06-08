@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:paml_20190140086_ewallet/view/auth/login.dart';
+import 'package:paml_20190140086_ewallet/view/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // SharedPreferences prefs = await SharedPreferences.getInstance();
-  // var email = prefs.getString("email");
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var email = prefs.getString("email");
+  // runApp(const MyApp());
 
-  // runApp(
-  //   MaterialApp(
-  //     debugShowCheckedModeBanner: false,
-  //     home: email == null ? Login() : Home(),
-  //   )
-  // );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: email == null ? LoginPage() : HomePage(),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
