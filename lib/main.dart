@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paml_20190140086_ewallet/view/auth/login.dart';
-import 'package:paml_20190140086_ewallet/view/home.dart';
+import 'package:paml_20190140086_ewallet/presentation/screens/auth/login.dart';
+import 'package:paml_20190140086_ewallet/presentation/screens/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -19,7 +19,7 @@ Future<void> main() async {
 
   runApp(
     MaterialApp(
-      title: 'E-Wallet',
+      title: 'Expense Tracker',
       theme: ThemeData(
         primarySwatch: Colors.lightBlue,
       ),

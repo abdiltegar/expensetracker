@@ -1,47 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter/widgets.dart';
-import 'package:paml_20190140086_ewallet/utilities/constant.dart';
-import 'package:paml_20190140086_ewallet/view/auth/login.dart';
-import 'package:paml_20190140086_ewallet/widget/input_email.dart';
-import 'package:paml_20190140086_ewallet/widget/input_password.dart';
-import 'package:paml_20190140086_ewallet/widget/input_repassword.dart';
-import 'package:paml_20190140086_ewallet/widget/input_text.dart';
+import 'package:paml_20190140086_ewallet/config/constant.dart';
+import 'package:paml_20190140086_ewallet/presentation/screens/auth/register.dart';
+import 'package:paml_20190140086_ewallet/presentation/widgets/input_email.dart';
+import 'package:paml_20190140086_ewallet/presentation/widgets/input_password.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
-  final nameCtrl = TextEditingController();
+class _LoginPageState extends State<LoginPage> {
+
   final emailCtrl = TextEditingController();
   final passwordCtrl = TextEditingController();
-  final rePasswordCtrl = TextEditingController();
 
-  final _formRegisterKey = GlobalKey<FormState>();
+  final _formLoginKey = GlobalKey<FormState>();
 
-  Widget _buildInputName() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Text("Name",style: labelStyle),
-        const SizedBox(height: 10.0),
-        InputText(prefixIcon: const Icon(Icons.person_outline_rounded, color:Colors.white), validatorMessage: "Name cannot be empty", labelText: "Enter your name", style: 1, controller: nameCtrl)
-      ],
-    );
-  }
-  
   Widget _buildInputEmail() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         const Text("Email",style: labelStyle),
         const SizedBox(height: 10.0),
-        InputEmail(prefixIcon: const Icon(Icons.email_outlined, color:Colors.white), labelText: "Enter your email", style: 1, controller: emailCtrl)
+        InputEmail(prefixIcon: const Icon(Icons.email_outlined, color:Colors.white), labelText: "Masukkan email", style: 1, controller: emailCtrl)
       ],
     );
   }
@@ -52,18 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
       children: <Widget>[
         const Text("Password",style: labelStyle),
         const SizedBox(height: 10.0),
-        InputPassword(prefixIcon: const Icon(Icons.key_outlined, color:Colors.white), labelText: "Enter your password", style: 1, controller: passwordCtrl)
-      ],
-    );
-  }
-
-  Widget _buildInputRePassword() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Text("Re-Password",style: labelStyle),
-        const SizedBox(height: 10.0),
-        InputRePassword(prefixIcon: const Icon(Icons.key_outlined, color:Colors.white), labelText: "Enter your password", style: 1, controller: rePasswordCtrl, passwordController: passwordCtrl,)
+        InputPassword(prefixIcon: const Icon(Icons.key_outlined, color:Colors.white), labelText: "Masukkan password", style: 1, controller: passwordCtrl)
       ],
     );
   }
@@ -74,8 +46,8 @@ class _RegisterPageState extends State<RegisterPage> {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: (){
-          if(_formRegisterKey.currentState!.validate()){
-            _formRegisterKey.currentState!.save();
+          if(_formLoginKey.currentState!.validate()){
+            _formLoginKey.currentState!.save();
           }else{
             debugPrint("Not Validate");
           }
@@ -85,19 +57,19 @@ class _RegisterPageState extends State<RegisterPage> {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
           backgroundColor: Colors.white,
         ),
-        child: const Text("Register", style: TextStyle(color: Color(0xFF398AE5)),),
+        child: const Text("MASUK", style: TextStyle(color: Color(0xFF398AE5)),),
       ),
     );
   }
 
-  Widget _buildSigninBtn() {
+  Widget _buildSignupBtn() {
     return GestureDetector(
-      onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage())),
+      onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RegisterPage())),
       child: RichText(
         text: const TextSpan(
           children: [
             TextSpan(
-              text: 'I have an Account, ',
+              text: 'Belum punya akun? ',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 14,
@@ -105,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
             TextSpan(
-              text: 'Sign In',
+              text: 'Daftar',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 14,
@@ -117,7 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,7 +133,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(height: 40),
                   const Text(
-                    "Sign-Up",
+                    "Masuk",
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'OpenSans',
@@ -170,23 +142,19 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                   Form(
-                    key: _formRegisterKey,
+                    key: _formLoginKey,
                     child: Column(
                       children: [
                         const SizedBox(height: 20),
-                        _buildInputName(),
-                        const SizedBox(height: 10),
                         _buildInputEmail(),
                         const SizedBox(height: 10),
                         _buildInputPassword(),
-                        const SizedBox(height: 10),
-                        _buildInputRePassword(),
                         const SizedBox(height: 10),
                         _buildLoginBtn(),
                       ],
                     ),
                   ),
-                  _buildSigninBtn(),
+                  _buildSignupBtn(),
                 ],
               ),
             ),

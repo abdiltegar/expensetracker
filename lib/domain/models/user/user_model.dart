@@ -3,30 +3,26 @@ import 'dart:convert';
 
 class UserModel {
   final String id;
+  final String uid;
   final String name;
-  final String email;
-  final String password;
   final double balance;
   UserModel({
     required this.id,
+    required this.uid,
     required this.name,
-    required this.email,
-    required this.password,
     required this.balance,
   });
 
   UserModel copyWith({
     String? id,
+    String? uid,
     String? name,
-    String? email,
-    String? password,
     double? balance,
   }) {
     return UserModel(
       id: id ?? this.id,
+      uid: uid ?? this.uid,
       name: name ?? this.name,
-      email: email ?? this.email,
-      password: password ?? this.password,
       balance: balance ?? this.balance,
     );
   }
@@ -34,9 +30,8 @@ class UserModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'uid': uid,
       'name': name,
-      'email': email,
-      'password': password,
       'balance': balance,
     };
   }
@@ -44,9 +39,8 @@ class UserModel {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       id: map['id'] as String,
+      uid: map['uid'] as String,
       name: map['name'] as String,
-      email: map['email'] as String,
-      password: map['password'] as String,
       balance: map['balance'] as double,
     );
   }
@@ -57,7 +51,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, email: $email, password: $password, balance: $balance)';
+    return 'UserModel(id: $id, uid: $uid, name: $name, balance: $balance)';
   }
 
   @override
@@ -66,18 +60,16 @@ class UserModel {
   
     return 
       other.id == id &&
+      other.uid == uid &&
       other.name == name &&
-      other.email == email &&
-      other.password == password &&
       other.balance == balance;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
+      uid.hashCode ^
       name.hashCode ^
-      email.hashCode ^
-      password.hashCode ^
       balance.hashCode;
   }
 }
