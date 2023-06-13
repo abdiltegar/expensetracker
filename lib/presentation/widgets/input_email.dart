@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paml_20190140086_ewallet/utilities/constant.dart';
+import 'package:paml_20190140086_ewallet/config/constant.dart';
 
 class InputEmail extends StatefulWidget {
   const InputEmail({super.key, required this.prefixIcon, required this.labelText, required this.style, required this.controller});
