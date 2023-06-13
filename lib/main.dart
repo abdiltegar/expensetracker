@@ -8,38 +8,36 @@ import 'firebase_options.dart';
 Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
-  
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  var email = prefs.getString("email");
-  // runApp(const MyApp());
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  runApp(
-    MaterialApp(
-      title: 'Expense Tracker',
-      theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: email == null ? const LoginPage() : const HomePage(),
-    )
-  );
+  
+  SharedPreferences.getInstance().then((instance) {
+    String uid = '';
+    if (instance.containsKey('uid')) {
+      uid = instance.getString('uid') ?? '';
+    }
+    runApp(MyApp(hasSession: uid.isNotEmpty));
+  });
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+    required this.hasSession
+  });
+
+  final bool hasSession;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Expense Tracker',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      home: hasSession ? const HomePage() : const LoginPage(),
+      debugShowCheckedModeBanner: false
     );
   }
 }

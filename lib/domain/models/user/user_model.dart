@@ -2,10 +2,10 @@
 import 'dart:convert';
 
 class UserModel {
-  final String id;
-  final String uid;
-  final String name;
-  final double balance;
+  late final String id;
+  late final String uid;
+  late final String name;
+  late final int balance;
   UserModel({
     required this.id,
     required this.uid,
@@ -17,7 +17,7 @@ class UserModel {
     String? id,
     String? uid,
     String? name,
-    double? balance,
+    int? balance,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -41,7 +41,7 @@ class UserModel {
       id: map['id'] as String,
       uid: map['uid'] as String,
       name: map['name'] as String,
-      balance: map['balance'] as double,
+      balance: map['balance'] as int,
     );
   }
 

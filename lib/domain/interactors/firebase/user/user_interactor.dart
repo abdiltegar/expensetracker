@@ -6,25 +6,27 @@ import 'package:paml_20190140086_ewallet/domain/models/user/user_model.dart';
 class UserInteractor {
 
   Future<UserModel?> get(String uid) async {
-    UserModel? res;
-
     try{
+      debugPrint('-- Get to get user at firestore');
+
       final data = await FirebaseFirestore.instance.collection('users')
       .where('uid', isEqualTo: uid)
       .limit(1).get();
 
-      for (var item in data.docs){
-        Map<String, dynamic> tempData = Map.from(item.data());
-        final id = <String, String>{'id': item.id};
-        tempData.addEntries(id.entries);
+      debugPrint('-- uid : ${data.docs[0].data()['uid']}, name : ${data.docs[0].data()['name']}, balance : ${data.docs[0].data()['balance']}');
 
-        res = UserModel.fromMap(tempData);
+      if(data.docs.isNotEmpty){
+
+        UserModel res = UserModel(id: data.docs[0].id, uid: data.docs[0].data()['uid'], name: data.docs[0].data()['name'], balance: data.docs[0].data()['balance']);
+        debugPrint('-- res 5 -- ${res.toString()}');
+
+        return res;      
       }
-    } on FirebaseException catch (e){
-      debugPrint('error message : ${e.message}');
-    }
 
-    return res;
+    } on FirebaseException catch (e){
+      debugPrint('-- error message : ${e.message}');
+      return null;
+    }
   } 
 
   Future add(Map<String, dynamic> data) async {
