@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:paml_20190140086_ewallet/domain/interactors/firebase/auth/auth_interactor.dart';
 import 'package:paml_20190140086_ewallet/domain/interactors/firebase/user/user_interactor.dart';
 import 'package:paml_20190140086_ewallet/domain/models/auth/auth_login_model.dart';
@@ -27,14 +28,18 @@ class AuthRepository {
     final registerRes = await authInteractor.register(email, password);
     if (registerRes.status) {
 
-      await userInteractor.add(<String, dynamic>{
+      final newUser = <String, dynamic>{
         'uid': registerRes.data!.uid,
         'name': name,
         'balance': 0
-      });
+      };
+
+      await userInteractor.add(newUser);
 
       setPreferences(registerRes.data!.uid, registerRes.data!.email, name);
     }
+
+    debugPrint(' -- Register Result : ${registerRes.toString()}');
     return registerRes;
   }
 
