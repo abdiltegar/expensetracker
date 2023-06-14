@@ -132,10 +132,27 @@ class _RegisterPageState extends State<RegisterPage> {
           // TODO: implement listener
           if (state is AuthRegisterLoaded) {
             if (state.response.status) {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                  (route) => false);
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Pendaftaran berhasil'),
+                    content: const Text(''),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => const HomePage()),
+                            (route) => false);
+                        },
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  );
+                }
+              );
+              
             }
           }
         },

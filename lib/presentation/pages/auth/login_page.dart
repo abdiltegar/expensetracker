@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:paml_20190140086_ewallet/config/color.dart';
 import 'package:paml_20190140086_ewallet/config/constant.dart';
 import 'package:paml_20190140086_ewallet/presentation/pages/auth/bloc/auth_bloc.dart';
 import 'package:paml_20190140086_ewallet/presentation/pages/auth/register_page.dart';
@@ -110,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                           gradient: LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
-                              colors: [Color(0xFF74AFF5), Color(0xFF398AE5)]))),
+                              colors: [mainLightBlue, mainDarkBlue]))),
                   SizedBox(
                     height: double.infinity,
                     child: SingleChildScrollView(
