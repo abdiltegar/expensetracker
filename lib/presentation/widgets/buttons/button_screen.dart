@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:paml_20190140086_ewallet/config/color.dart';
 
 class ButtonScreen extends StatefulWidget {
   const ButtonScreen({super.key, required this.text, required this.isLoading, required this.action});
@@ -34,7 +35,7 @@ class _ButtonScreenState extends State<ButtonScreen> {
           height: 25,
           child: CircularProgressIndicator(
             backgroundColor: Colors.transparent,
-            color: Colors.white,
+            color: mainDarkBlue,
           )
         ) :
         Text(

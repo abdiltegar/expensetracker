@@ -27,16 +27,16 @@ class _HomePageState extends State<HomePage> {
       controller: _tabController,
       screens: const [DashboardPage(), IncomePage(), OutcomePage(), ReportPage(), ProfilePage()],
       items: _navBarItems(),
-      backgroundColor: Colors.white,
+      backgroundColor: mainDarkBlue,
       decoration: NavBarDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        colorBehindNavBar: Colors.white,
+        colorBehindNavBar: mainDarkBlue,
       ),
       confineInSafeArea: true,
       handleAndroidBackButtonPress: true, 
       resizeToAvoidBottomInset: true,
       hideNavigationBarWhenKeyboardShows: true,
-      stateManagement: false,
+      stateManagement: true,
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
       itemAnimationProperties: const ItemAnimationProperties( // Navigation Bar's items animation properties.
@@ -48,41 +48,41 @@ class _HomePageState extends State<HomePage> {
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),
       ),
-      navBarStyle: NavBarStyle.style6,
+      navBarStyle: NavBarStyle.style1,
     );
   }
 
   List<PersistentBottomNavBarItem> _navBarItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.home, size: 20),
+        icon: const Icon(CupertinoIcons.home, size: 18),
         title: ("Dashboard"),
-        activeColorPrimary: mainDarkBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: Colors.white,
+        inactiveColorPrimary: CupertinoColors.systemGrey4,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.money_dollar, size: 20),
+        icon: const Icon(CupertinoIcons.money_dollar, size: 18),
         title: ("Incomes"),
-        activeColorPrimary: mainDarkBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: Colors.white,
+        inactiveColorPrimary: CupertinoColors.systemGrey4,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.shopping_cart, size: 20),
+        icon: const Icon(CupertinoIcons.shopping_cart, size: 18),
         title: ("Outcomes"),
-        activeColorPrimary: mainDarkBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: Colors.white,
+        inactiveColorPrimary: CupertinoColors.systemGrey4,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.chart_bar, size: 20),
+        icon: const Icon(CupertinoIcons.chart_bar, size: 18),
         title: ("Report"),
-        activeColorPrimary: mainDarkBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: Colors.white,
+        inactiveColorPrimary: CupertinoColors.systemGrey4,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.profile_circled, size: 20),
+        icon: const Icon(CupertinoIcons.profile_circled, size: 18),
         title: ("Profile"),
-        activeColorPrimary: mainDarkBlue,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
+        activeColorPrimary: Colors.white,
+        inactiveColorPrimary: CupertinoColors.systemGrey4,
       ),
     ];
   }

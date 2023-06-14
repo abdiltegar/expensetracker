@@ -5,11 +5,13 @@ class UserModel {
   late final String id;
   late final String uid;
   late final String name;
+  late final String email;
   late final int balance;
   UserModel({
     required this.id,
     required this.uid,
     required this.name,
+    required this.email,
     required this.balance,
   });
 
@@ -17,12 +19,14 @@ class UserModel {
     String? id,
     String? uid,
     String? name,
+    String? email,
     int? balance,
   }) {
     return UserModel(
       id: id ?? this.id,
       uid: uid ?? this.uid,
       name: name ?? this.name,
+      email: email ?? this.email,
       balance: balance ?? this.balance,
     );
   }
@@ -32,6 +36,7 @@ class UserModel {
       'id': id,
       'uid': uid,
       'name': name,
+      'email': email,
       'balance': balance,
     };
   }
@@ -41,6 +46,7 @@ class UserModel {
       id: map['id'] as String,
       uid: map['uid'] as String,
       name: map['name'] as String,
+      email: map['email'] as String,
       balance: map['balance'] as int,
     );
   }
@@ -51,7 +57,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, uid: $uid, name: $name, balance: $balance)';
+    return 'UserModel(id: $id, uid: $uid, name: $name, email: $email, balance: $balance)';
   }
 
   @override
@@ -62,6 +68,7 @@ class UserModel {
       other.id == id &&
       other.uid == uid &&
       other.name == name &&
+      other.email == email &&
       other.balance == balance;
   }
 
@@ -70,6 +77,7 @@ class UserModel {
     return id.hashCode ^
       uid.hashCode ^
       name.hashCode ^
+      email.hashCode ^
       balance.hashCode;
   }
 }
