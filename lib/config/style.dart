@@ -38,3 +38,6 @@ const displayEmailStyle = TextStyle(
 
 const incomeNumberStyle = TextStyle(color: Colors.green, fontWeight: FontWeight.bold);
 const outcomeNumberStyle = TextStyle(color: Colors.red, fontWeight: FontWeight.bold);
+
+const displayDayStyle = TextStyle(color: Colors.black, fontSize: 18);
+const displayDateStyle = TextStyle(color: mainDarkBlue, fontSize: 15, fontWeight: FontWeight.bold);

@@ -74,6 +74,9 @@ class _DashboardPageState extends State<DashboardPage> {
                             ],
                           ),
                         ),
+                        Text(DateFormat.EEEE().format(DateTime.now()), style: displayDayStyle,),
+                        Text('${DateFormat.d().format(DateTime.now())} ${DateFormat.MMMM().format(DateTime.now())} ${DateFormat.y().format(DateTime.now())}', style: displayDateStyle,),
+                        const SizedBox(height: 15),
                         _balanceCard(state.data.user!.balance),
                         const SizedBox(height: 15),
                         _latestTransactionCard(state.data.latestTransactions)

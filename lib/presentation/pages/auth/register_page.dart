@@ -42,6 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
             validatorMessage: "Nama tidak boleh kosong",
             labelText: "Masukkan nama anda",
             style: 1,
+            keyboardType: TextInputType.text,
             controller: _nameCtrl)
       ],
     );

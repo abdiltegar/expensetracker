@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:paml_20190140086_ewallet/config/style.dart';
 
 class InputText extends StatefulWidget {
-  const InputText({super.key, required this.validatorMessage, required this.prefixIcon, required this.labelText, required this.style, required this.controller});
+  const InputText({super.key, required this.validatorMessage, this.prefixIcon, required this.labelText, required this.style, required this.keyboardType, required this.controller});
 
   final String validatorMessage;
-  final Icon prefixIcon;
+  final Icon? prefixIcon;
   final String labelText;
   final int style;
+  final TextInputType keyboardType;
   final TextEditingController controller;
 
   @override
@@ -38,14 +39,14 @@ class _InputTextState extends State<InputText> {
           hintStyle: hintTextStyle,
           errorStyle: const TextStyle(color: Colors.white70)
         ),
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: widget.keyboardType,
         controller: widget.controller,
       );
 
     }else{
 
       return TextFormField(
-        keyboardType: TextInputType.text,
+        keyboardType: widget.keyboardType,
         validator: (value) => value.toString().isEmpty ? widget.validatorMessage : null,
         decoration: InputDecoration(
           border: const OutlineInputBorder(
