@@ -15,7 +15,7 @@ class AuthRepository {
     if (loginRes.status) {
       debugPrint(' -- Going to get user -- ');
 
-      final userRes = await userInteractor.get(loginRes.data!.uid);
+      final userRes = await userInteractor.get(loginRes.data!.uid, email);
       debugPrint(' -- Get User Result : ${userRes.toString()}');
 
       if(userRes != null){
@@ -57,6 +57,6 @@ class AuthRepository {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('uid', uid);
     prefs.setString('email', email!);
-    prefs.setString('email', name!);
+    prefs.setString('name', name!);
   }
 }

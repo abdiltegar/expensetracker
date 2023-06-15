@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:paml_20190140086_ewallet/config/color.dart';
-import 'package:paml_20190140086_ewallet/config/constant.dart';
+import 'package:paml_20190140086_ewallet/config/style.dart';
 
 class ProfilePic extends StatefulWidget {
   const ProfilePic({super.key, required this.firstName, required this.backgroundColor, required this.textColor});
@@ -29,11 +29,11 @@ class _ProfilePicState extends State<ProfilePic> {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: widget.backgroundColor,
-          border: Border.all(color: Colors.grey, width: 0.5),
+          border: Border.all(color: Colors.white12, width: 2),
           // gradient: const LinearGradient(colors: [mainLightBlue, mainDarkBlue], begin: Alignment.topCenter, end: Alignment.bottomCenter)
         ),
         padding: EdgeInsets.all(8),
-        child: Text(widget.firstLetter, style: TextStyle(color: widget.textColor, fontSize: 20)),
+        child: Text(widget.firstLetter, style: TextStyle(color: widget.textColor, fontSize: 20, fontWeight: FontWeight.bold)),
       ),
     );
   }

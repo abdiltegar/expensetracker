@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:paml_20190140086_ewallet/config/color.dart';
 
 final boxDecorationStyle = BoxDecoration(
   color: const Color(0xFF6CA8F1),
@@ -22,3 +23,18 @@ const labelStyle = TextStyle(
   fontWeight: FontWeight.bold,
   fontFamily: 'OpenSans',
 );
+
+const displayNameStyle = TextStyle(
+  color: mainDarkBlue,
+  fontSize: 14,
+  fontFamily: 'OpenSans',
+);
+
+const displayEmailStyle = TextStyle(
+  color: Colors.black54,
+  fontSize: 11,
+  fontFamily: 'OpenSans',
+);
+
+const incomeNumberStyle = TextStyle(color: Colors.green, fontWeight: FontWeight.bold);
+const outcomeNumberStyle = TextStyle(color: Colors.red, fontWeight: FontWeight.bold);

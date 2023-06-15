@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paml_20190140086_ewallet/config/color.dart';
-import 'package:paml_20190140086_ewallet/config/constant.dart';
+import 'package:paml_20190140086_ewallet/config/style.dart';
 import 'package:paml_20190140086_ewallet/presentation/pages/auth/bloc/auth_bloc.dart';
 import 'package:paml_20190140086_ewallet/presentation/pages/auth/register_page.dart';
 import 'package:paml_20190140086_ewallet/presentation/pages/home_page.dart';

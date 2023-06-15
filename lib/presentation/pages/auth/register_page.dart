@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paml_20190140086_ewallet/config/constant.dart';
+import 'package:paml_20190140086_ewallet/config/style.dart';
 import 'package:paml_20190140086_ewallet/presentation/pages/auth/bloc/auth_bloc.dart';
 import 'package:paml_20190140086_ewallet/presentation/pages/auth/login_page.dart';
 import 'package:paml_20190140086_ewallet/presentation/pages/home_page.dart';
