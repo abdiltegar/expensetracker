@@ -41,3 +41,8 @@ const outcomeNumberStyle = TextStyle(color: Colors.red, fontWeight: FontWeight.b
 
 const displayDayStyle = TextStyle(color: Colors.black, fontSize: 18);
 const displayDateStyle = TextStyle(color: mainDarkBlue, fontSize: 15, fontWeight: FontWeight.bold);
+
+const displayProfileNameStyle = TextStyle(color: Colors.white, fontSize: 20);
+const displayProfileEmailStyle = TextStyle(color: Colors.white, fontSize: 15);
+
+const displayFooterStyle = TextStyle(color: Colors.white60, fontSize: 11,);

@@ -171,6 +171,15 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           _buildSignupBtn(),
+                          const SizedBox(height: 40,),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const[
+                              Text('ExpenseTracker ©2023', style: displayFooterStyle,),
+                              Text('by Abdil Tegar Arifin', style: displayFooterStyle,),
+                            ],
+                          )
                         ],
                       ),
                     ),

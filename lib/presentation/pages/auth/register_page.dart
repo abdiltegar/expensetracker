@@ -177,7 +177,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       padding: const EdgeInsets.only(
                         left: 40,
                         right: 40,
-                        top: 100,
+                        top: 80,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -233,6 +233,15 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                           _buildSigninBtn(),
+                          const SizedBox(height: 20,),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const[
+                              Text('ExpenseTracker ©2023', style: displayFooterStyle,),
+                              Text('by Abdil Tegar Arifin', style: displayFooterStyle,),
+                            ],
+                          )
                         ],
                       ),
                     ),
