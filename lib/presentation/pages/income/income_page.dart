@@ -87,22 +87,6 @@ class _IncomePageState extends State<IncomePage> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  // Container(
-                  //   width: double.infinity,
-                  //   decoration: const BoxDecoration(
-                  //     borderRadius: BorderRadius.vertical(bottom: Radius.circular(0), top: Radius.circular(10)),
-                  //     color: mainDarkBlue
-                  //   ),
-                  //   child: const Center(
-                  //     child: Padding(
-                  //       padding: EdgeInsets.all(8.0),
-                  //       child: Text(
-                  //         'Pemasukan',
-                  //         style: TextStyle(color: mainBackgroundWhite, fontWeight: FontWeight.bold),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   Expanded(
                     child: Container(
                       decoration: const BoxDecoration(

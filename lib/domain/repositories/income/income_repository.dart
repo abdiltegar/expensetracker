@@ -48,20 +48,28 @@ class IncomeRepository {
     var dailyReport = await reportInteractor.getByDate(data.userId, dateFormatter.dateFormatYMD(data.trxDate));
     if(dailyReport != null){ // if report at data.date is not empty , update the amount
       int updatedAmount = data.isIncome ? dailyReport.amount + data.amount : dailyReport.amount - data.amount;
+      int incomeAmount = data.isIncome ? dailyReport.income + data.amount : dailyReport.income;
+      int outcomeAmount = data.isIncome ? dailyReport.outcome : dailyReport.outcome + data.amount;
 
       var updatedReport = <String, dynamic>{
         'user_id': data.userId,
         'date': dateFormatter.dateFormatYMD(data.trxDate),
-        'amount': updatedAmount
+        'amount': updatedAmount,
+        'income': incomeAmount,
+        'outcome': outcomeAmount
       };
 
       await reportInteractor.update(dailyReport.id, updatedReport);
     } else {// if report at data.date is empty , add new report
+      int incomeAmount = data.isIncome ? data.amount : 0;
+      int outcomeAmount = data.isIncome ? 0 : data.amount;
 
       var newReport = <String, dynamic>{
         'user_id': data.userId,
         'date': dateFormatter.dateFormatYMD(data.trxDate),
-        'amount': data.amount
+        'amount': data.amount,
+        'income': incomeAmount,
+        'outcome': outcomeAmount
       };
 
       await reportInteractor.add(newReport);
@@ -72,10 +80,8 @@ class IncomeRepository {
     if(user != null){
       int balance = data.isIncome ? user.balance + data.amount : user.balance - data.amount;
       var updatedUser = <String, dynamic>{
-        'id': user.id, 
         'uid': user.uid, 
-        'name': user.name, 
-        'email': user.email, 
+        'name': user.name,
         'balance': balance
       };
 
@@ -105,20 +111,28 @@ class IncomeRepository {
     var dailyReport = await reportInteractor.getByDate(data.userId, dateFormatter.dateFormatYMD(data.trxDate));
     if(dailyReport != null){ // if report at data.date is not empty , update the amount
       int updatedAmount = data.isIncome ? (dailyReport.amount - prevIncome.amount) + data.amount : (dailyReport.amount - prevIncome.amount) - data.amount;
+      int incomeAmount = data.isIncome ? (dailyReport.income - prevIncome.amount) + data.amount : dailyReport.income;
+      int outcomeAmount = data.isIncome ? dailyReport.outcome : (dailyReport.outcome - prevIncome.amount) + data.amount;
 
       var updatedReport = <String, dynamic>{
         'user_id': data.userId,
         'date': dateFormatter.dateFormatYMD(data.trxDate),
-        'amount': updatedAmount
+        'amount': updatedAmount,
+        'income': incomeAmount,
+        'outcome': outcomeAmount
       };
 
       await reportInteractor.update(dailyReport.id, updatedReport);
     } else {// if report at data.date is empty , add new report
+      int incomeAmount = data.isIncome ? data.amount : 0;
+      int outcomeAmount = data.isIncome ? 0 : data.amount;
 
       var newReport = <String, dynamic>{
         'user_id': data.userId,
         'date': dateFormatter.dateFormatYMD(data.trxDate),
-        'amount': data.amount
+        'amount': data.amount,
+        'income': incomeAmount,
+        'outcome': outcomeAmount
       };
 
       await reportInteractor.add(newReport);
@@ -127,12 +141,10 @@ class IncomeRepository {
     // Update user's balance
     var user = await userInteractor.get(prefs.getString('uid')!, prefs.getString('email')!);
     if(user != null){
-      int balance = data.isIncome ? (data.amount - prevIncome.amount) + data.amount : (data.amount - prevIncome.amount) - data.amount;
+      int balance = data.isIncome ? (user.balance - prevIncome.amount) + data.amount : (user.balance + prevIncome.amount) - data.amount;
       var updatedUser = <String, dynamic>{
-        'id': user.id, 
         'uid': user.uid, 
-        'name': user.name, 
-        'email': user.email, 
+        'name': user.name,
         'balance': balance
       };
 
@@ -154,11 +166,15 @@ class IncomeRepository {
     var dailyReport = await reportInteractor.getByDate(data.userId, dateFormatter.dateFormatYMD(data.trxDate));
     if(dailyReport != null){ // if report at data.date is not empty , update the amount
       int updatedAmount = data.isIncome ? dailyReport.amount - data.amount : dailyReport.amount +  data.amount;
+      int incomeAmount = data.isIncome ? dailyReport.income - data.amount : dailyReport.income;
+      int outcomeAmount = data.isIncome ? dailyReport.outcome : dailyReport.outcome - data.amount;
 
       var updatedReport = <String, dynamic>{
         'user_id': data.userId,
         'date': dateFormatter.dateFormatYMD(data.trxDate),
-        'amount': updatedAmount
+        'amount': updatedAmount,
+        'income': incomeAmount,
+        'outcome': outcomeAmount
       };
 
       await reportInteractor.update(dailyReport.id, updatedReport);
@@ -169,10 +185,8 @@ class IncomeRepository {
     if(user != null){
       int balance = data.isIncome ? user.balance - data.amount : user.balance +  data.amount;
       var updatedUser = <String, dynamic>{
-        'id': user.id, 
         'uid': user.uid, 
-        'name': user.name, 
-        'email': user.email, 
+        'name': user.name,
         'balance': balance
       };
 

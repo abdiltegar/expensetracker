@@ -44,6 +44,7 @@ class TransactionInteractor {
       final data = await FirebaseFirestore.instance.collection('transactions')
       .where('user_id', isEqualTo:userId)
       .where('is_income', isEqualTo:isIncome)
+      .orderBy('trx_date', descending: true)
       .get();
 
       for(var item in data.docs){
@@ -74,6 +75,7 @@ class TransactionInteractor {
       
       final data = await FirebaseFirestore.instance.collection('transactions')
       .where('user_id', isEqualTo:userId)
+      .orderBy('trx_date', descending: true)
       .limit(5).get();
 
       for(var item in data.docs){
@@ -121,6 +123,39 @@ class TransactionInteractor {
     }
 
     return null;
+  }
+
+  Future<List<TransactionModel>> getByDate(String userId, Timestamp date) async {
+
+    List<TransactionModel> res = [];
+
+    try{
+      debugPrint('-- going to get trx by date');
+      
+      final data = await FirebaseFirestore.instance.collection('transactions')
+      .where('user_id', isEqualTo:userId)
+      .where('trx_date', isGreaterThanOrEqualTo:date)
+      .where('trx_date', isLessThanOrEqualTo:Timestamp.fromDate(date.toDate().add(const Duration(days: 1))))
+      .orderBy('trx_date', descending: true)
+      .limit(5).get();
+
+      for(var item in data.docs){
+        TransactionModel transaction = TransactionModel(
+          amount: item.data()['amount'],
+          description: item.data()['description'],
+          id: item.id,
+          isIncome: item.data()['is_income'],
+          trxDate: item.data()['trx_date'],
+          userId: item.data()['user_id']
+        );
+
+        res.add(transaction);
+      }
+    }on FirebaseException catch(e){
+      debugPrint(' -- failed get latest transaction: ${e.message}');
+    }
+
+    return res;
   }
 
   Future add(Map<String, dynamic> data) async {

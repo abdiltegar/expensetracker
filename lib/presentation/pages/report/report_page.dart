@@ -14,17 +14,21 @@ class _ReportPageState extends State<ReportPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [mainLightBlue, mainDarkBlue]))),
-        ],
+      appBar: AppBar(
+        backgroundColor: mainDarkBlue,
+        title: const Text("Laporan"),
+      ),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Container(
+                height: double.infinity,
+                width: double.infinity,
+                decoration:
+                    const BoxDecoration(color: mainBackgroundWhite)),
+            
+          ],
+        )
       ),
     );
   }

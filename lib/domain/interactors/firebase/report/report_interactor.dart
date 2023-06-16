@@ -15,6 +15,8 @@ class ReportInteractor {
       for(var item in data.docs){
         ReportModel transaction = ReportModel(
           amount: item.data()['amount'],
+          income: item.data()['income'],
+          outcome: item.data()['outcome'],
           id: item.id,
           date: item.data()['date'],
           userId: item.data()['user_id']
@@ -43,17 +45,52 @@ class ReportInteractor {
           id: data.docs[0].id, 
           userId: data.docs[0].data()['user_id'], 
           date: data.docs[0].data()['date'], 
-          amount: data.docs[0].data()['amount']
+          amount: data.docs[0].data()['amount'],
+          income: data.docs[0].data()['income'],
+          outcome: data.docs[0].data()['outcome'],
         );
         debugPrint('-- res 5 -- ${res.toString()}');
 
         return res;      
       }
     }on FirebaseException catch(e){
-      debugPrint(' -- failed get last 30 days report: ${e.message}');
+      debugPrint(' -- failed get report by date : ${e.message}');
     }
 
     return null;
+  }
+
+  Future<List<ReportModel>> getByRangeDate(String userId, String startDate, String endDate) async {
+    List<ReportModel> res = [];
+
+    try{
+      final data = await FirebaseFirestore.instance.collection('daily_reports')
+      .where('user_id', isEqualTo:userId)
+      .where('date', isGreaterThanOrEqualTo:startDate)
+      .where('date', isGreaterThanOrEqualTo:endDate)
+      .orderBy('date')
+      .get();
+
+      if(data.docs.isNotEmpty){
+
+        for(var item in data.docs){
+          ReportModel transaction = ReportModel(
+            amount: item.data()['amount'],
+            income: item.data()['income'],
+            outcome: item.data()['outcome'],
+            id: item.id,
+            date: item.data()['date'],
+            userId: item.data()['user_id']
+          );
+
+          res.add(transaction);
+        }     
+      }
+    }on FirebaseException catch(e){
+      debugPrint(' -- failed get report by range: ${e.message}');
+    }
+
+    return res;
   }
 
   Future add(Map<String, dynamic> data) async {
