@@ -29,18 +29,18 @@ class _DashboardPageState extends State<DashboardPage> {
     return BlocProvider(
       create: (context) => _dashboardBloc..add(GetDataDashboard()),
       child: Scaffold(
-        body: Container(
-          height: double.infinity,
-          color: mainBackgroundWhite,
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.all(10),
-            child: BlocBuilder<DashboardBloc, DashboardState>(
-              builder: (context, state) {
-                if(state is DashboardLoaded){
-                  return RefreshIndicator(
-                    onRefresh: () async => _dashboardBloc..add(GetDataDashboard()),
-                    child: Column(
+        body: RefreshIndicator(
+          onRefresh: () async => _dashboardBloc..add(GetDataDashboard()),
+          child: Container(
+            height: double.infinity,
+            color: mainBackgroundWhite,
+            child: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              padding: const EdgeInsets.all(10),
+              child: BlocBuilder<DashboardBloc, DashboardState>(
+                builder: (context, state) {
+                  if(state is DashboardLoaded){
+                    return Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
                         Padding(
@@ -81,49 +81,49 @@ class _DashboardPageState extends State<DashboardPage> {
                         const SizedBox(height: 15),
                         _latestTransactionCard(state.data.latestTransactions)
                       ],
-                    ),
-                  );
-                } else {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const ProfilePic(
-                              backgroundColor: mainDarkBlue,
-                              firstName: '-',
-                              textColor: Colors.white,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10, top: 3),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: const [
-                                  Text(
-                                    '-',
-                                    style: displayNameStyle,
-                                  ),
-                                  Text(
-                                    '-',
-                                    style: displayEmailStyle,
-                                  ),
-                                ],
+                    );
+                  } else {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const ProfilePic(
+                                backgroundColor: mainDarkBlue,
+                                firstName: '-',
+                                textColor: Colors.white,
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10, top: 3),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: const [
+                                    Text(
+                                      '-',
+                                      style: displayNameStyle,
+                                    ),
+                                    Text(
+                                      '-',
+                                      style: displayEmailStyle,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      _balanceCard(0),
-                      const SizedBox(height: 20),
-                      _latestTransactionCard([])
-                    ],
-                  );
-                }
-              },
+                        _balanceCard(0),
+                        const SizedBox(height: 20),
+                        _latestTransactionCard([])
+                      ],
+                    );
+                  }
+                },
+              ),
             ),
           ),
         )

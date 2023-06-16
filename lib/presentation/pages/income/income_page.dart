@@ -8,6 +8,7 @@ import 'package:paml_20190140086_ewallet/config/style.dart';
 import 'package:paml_20190140086_ewallet/domain/helpers/date_formatter.dart';
 import 'package:paml_20190140086_ewallet/presentation/pages/income/add_income_page.dart';
 import 'package:paml_20190140086_ewallet/presentation/pages/income/bloc/income_bloc.dart';
+import 'package:paml_20190140086_ewallet/presentation/pages/income/edit_income_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../config/color.dart';
@@ -108,7 +109,18 @@ class _IncomePageState extends State<IncomePage> {
                               padding: const EdgeInsets.all(1),
                               child: InkWell(
                                 onLongPress: () {
-                                  
+                                  PersistentNavBarNavigator.pushNewScreen(
+                                    context,
+                                    screen: EditIncomePage(income: income),
+                                    withNavBar: false
+                                  ).then((value) {
+                                    if (value != null) {
+                                      List<String> data = List.from(value);
+                                      if (data.contains('refresh')) {
+                                        _incomeBloc.add(GetDataIncome());
+                                      }
+                                    }
+                                  });
                                 },
                                 child: Card(
                                   elevation: 2,
@@ -131,7 +143,7 @@ class _IncomePageState extends State<IncomePage> {
                                     ),
                                     trailing: IconButton(
                                       onPressed: () {
-                                        
+                                        showDeleteDialog(context, _incomeBloc, income.id);
                                       },
                                       icon: const Icon(Icons.delete, color: Colors.red),
                                     ),
@@ -156,4 +168,38 @@ class _IncomePageState extends State<IncomePage> {
       },
     );
   }
+}
+
+showDeleteDialog(BuildContext context, IncomeBloc bloc, String id) {
+  // set up the buttons
+  Widget cancelButton = TextButton(
+    child: const Text("Batalkan"),
+    onPressed:  () {
+      Navigator.of(context, rootNavigator: true).pop('dialog');
+    },
+  );
+  Widget continueButton = TextButton(
+    child: const Text("Hapus"),
+    onPressed:  () {
+      bloc.add(DeleteIncome(id: id));
+      Navigator.of(context, rootNavigator: true).pop('dialog');
+      () async => bloc..add(GetDataIncome());
+    },
+  );
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: const Text("AlertDialog"),
+    content: const Text("Apakah anda yakin ingin menghapus data ini?"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

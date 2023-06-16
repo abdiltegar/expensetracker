@@ -21,12 +21,8 @@ class DashboardRepository {
 
       final latestTransactions = await transactionInteractor.getLatest(prefs.getString('uid')!);
 
-      debugPrint('-- data dashboard : ${DashboardModel(user: user, latestTransactions: latestTransactions).toString()}');
-
       return DashboardModel(user: user, latestTransactions: latestTransactions);
     }catch(e){
-
-      debugPrint('-- data dashboard error : ${e.toString()}');
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.clear();

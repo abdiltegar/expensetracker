@@ -4,25 +4,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:paml_20190140086_ewallet/config/color.dart';
+import 'package:paml_20190140086_ewallet/domain/helpers/date_formatter.dart';
 import 'package:paml_20190140086_ewallet/domain/models/transaction/transaction_model.dart';
 import 'package:paml_20190140086_ewallet/presentation/pages/income/bloc/income_bloc.dart';
 import 'package:paml_20190140086_ewallet/presentation/widgets/inputs/input_date.dart';
 import 'package:paml_20190140086_ewallet/presentation/widgets/inputs/input_text.dart';
 
-class AddIncomePage extends StatefulWidget {
-  const AddIncomePage({super.key});
+// ignore: must_be_immutable
+class EditIncomePage extends StatefulWidget {
+  EditIncomePage({super.key, required this.income});
+
+  TransactionModel income;
 
   @override
-  State<AddIncomePage> createState() => _AddIncomePageState();
+  State<EditIncomePage> createState() => _EditIncomePageState();
 }
 
-class _AddIncomePageState extends State<AddIncomePage> {
+class _EditIncomePageState extends State<EditIncomePage> {
+
   final _incomeBloc = IncomeBloc();
 
   final _trxDateCtrl = TextEditingController();
   final _amountCtrl = TextEditingController();
   final _descriptionCtrl = TextEditingController();
+
+  @override
+  void initState() {
+    _trxDateCtrl.text = DateFormat('yyyy-MM-dd').format(widget.income.trxDate.toDate());
+    _amountCtrl.text = widget.income.amount.toString();
+    _descriptionCtrl.text = widget.income.description;
+    super.initState();
+  }
 
   final _formAddKey = GlobalKey<FormState>();
 
@@ -32,14 +46,14 @@ class _AddIncomePageState extends State<AddIncomePage> {
       create: (context) => _incomeBloc,
       child: BlocListener<IncomeBloc, IncomeState>(
         listener: (context, state) {
-          if (state is IncomeAdded) {
+          if (state is IncomeUpdated) {
             Navigator.pop(context, ['refresh']);
           }
         },
         child: Scaffold(
             appBar: AppBar(
               backgroundColor: mainDarkBlue,
-              title: const Text("Tambah Pemasukan"),
+              title: const Text("Edit Pemasukan"),
             ),
             body: BlocBuilder<IncomeBloc, IncomeState>(
               builder: (context, state) {
@@ -83,19 +97,19 @@ class _AddIncomePageState extends State<AddIncomePage> {
                                           debugPrint("Validate 1");
 
                                           var data = TransactionModel(
-                                            id: "",
+                                            id: widget.income.id,
                                             amount: int.parse(_amountCtrl.text),
                                             description: _descriptionCtrl.text,
                                             isIncome: true,
                                             trxDate:
                                                 Timestamp.fromDate(dateTimeTrx),
-                                            userId: "",
+                                            userId: widget.income.userId,
                                           );
 
                                           debugPrint(data.toString());
 
                                           _incomeBloc
-                                              .add(AddIncome(data: data));
+                                              .add(UpdateIncome(data: data));
 
                                           debugPrint("Validate 2");
                                         } catch (e) {
