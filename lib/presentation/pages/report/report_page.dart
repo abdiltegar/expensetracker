@@ -42,12 +42,16 @@ class _ReportPageState extends State<ReportPage> {
       ),
       body: BlocProvider(
         create: (context) => _reportBloc..add(GetDataReport(
-          _startDateCtrl.text, 
-          endDate: dateFormatter.dateFormatYMD(Timestamp.fromDate(DateTime.now().subtract(const Duration(days: 30)))),
-          filterDate: Timestamp.now()
+          startDate: dateFormatter.dateFormatYMD(Timestamp.fromDate(DateTime.parse(_startDateCtrl.text))), 
+          endDate: dateFormatter.dateFormatYMD(Timestamp.fromDate(DateTime.parse(_endDateCtrl.text))),
+          filterDate: Timestamp.fromDate(DateTime.parse(_filterDateCtrl.text))
         )),
         child: RefreshIndicator(
-          onRefresh: () async => _reportBloc..add(GetDataReport()),
+          onRefresh: () async => _reportBloc..add(GetDataReport(
+          startDate: dateFormatter.dateFormatYMD(Timestamp.fromDate(DateTime.parse(_startDateCtrl.text))), 
+          endDate: dateFormatter.dateFormatYMD(Timestamp.fromDate(DateTime.parse(_endDateCtrl.text))),
+          filterDate: Timestamp.fromDate(DateTime.parse(_filterDateCtrl.text))
+        )),
           child: SafeArea(
             child: Container(
               height: double.infinity,
