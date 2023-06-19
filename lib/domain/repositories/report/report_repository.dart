@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:paml_20190140086_ewallet/domain/helpers/date_formatter.dart';
 import 'package:paml_20190140086_ewallet/domain/interactors/firebase/report/report_interactor.dart';
 import 'package:paml_20190140086_ewallet/domain/interactors/firebase/transaction/transaction_interactor.dart';
@@ -15,11 +16,17 @@ class ReportRepository{
   Future<ReportViewModel> getByRangeDate(String startDate, String endDate, Timestamp filterDate) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
+    debugPrint('-- filter date : ${DateTime.fromMicrosecondsSinceEpoch(filterDate.microsecondsSinceEpoch)}');
     try{
       var transactions = await transactionInteractor.getByDate(prefs.getString('uid')!, filterDate);
 
       List<ReportModel> dailyReports = [];
       final daysToGenerate = DateTime.parse(endDate).difference(DateTime.parse(startDate)).inDays;
+
+      int maxIncome = 0;
+      int maxOutcome = 0;
+      int totalIncome = 0;
+      int totalOutcome = 0;
       
       for(int i = 0; i <= daysToGenerate; i++){
         var thisDate = dateFormatter.dateFormatYMD(Timestamp.fromDate(DateTime.parse(startDate).add(Duration(days: i))));
@@ -35,6 +42,16 @@ class ReportRepository{
             userId: resReportInteractor.userId
           );
           dailyReports.add(report);
+
+          if(maxIncome < resReportInteractor.income){
+            maxIncome = resReportInteractor.income;
+          }
+          if(maxOutcome < resReportInteractor.outcome){
+            maxOutcome = resReportInteractor.outcome;
+          }
+
+          totalIncome += resReportInteractor.income;
+          totalOutcome += resReportInteractor.outcome;
         }else{
           ReportModel report = ReportModel(
             id: "", 
@@ -48,14 +65,14 @@ class ReportRepository{
         }
       }
 
-      return ReportViewModel(dailyReports: dailyReports, transactions: transactions);
+      return ReportViewModel(dailyReports: dailyReports, transactions: transactions, maxIncome: maxIncome, maxOutcome: maxOutcome, totalIncome: totalIncome, totalOutcome: totalOutcome);
     }catch(e){
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.clear();
     }
 
-    return ReportViewModel(dailyReports: [], transactions: []);
+    return ReportViewModel(dailyReports: [], transactions: [], maxIncome: 0, maxOutcome: 0, totalIncome: 0, totalOutcome: 0);
   }
 
 }

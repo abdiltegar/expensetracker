@@ -135,7 +135,7 @@ class TransactionInteractor {
       final data = await FirebaseFirestore.instance.collection('transactions')
       .where('user_id', isEqualTo:userId)
       .where('trx_date', isGreaterThanOrEqualTo:date)
-      .where('trx_date', isLessThanOrEqualTo:Timestamp.fromDate(date.toDate().add(const Duration(days: 1))))
+      .where('trx_date', isLessThan:Timestamp.fromDate(date.toDate().add(const Duration(days: 1))))
       .orderBy('trx_date', descending: true)
       .limit(5).get();
 

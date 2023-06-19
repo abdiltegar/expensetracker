@@ -46,3 +46,6 @@ const displayProfileNameStyle = TextStyle(color: Colors.white, fontSize: 20);
 const displayProfileEmailStyle = TextStyle(color: Colors.white, fontSize: 15);
 
 const displayFooterStyle = TextStyle(color: Colors.white60, fontSize: 11,);
+
+const gradientGreenStyle = LinearGradient(colors: [Colors.green, Colors.lightGreen], begin: Alignment.bottomCenter, end: Alignment.topCenter);
+const gradientRedStyle = LinearGradient(colors: [Colors.red, Colors.orange], begin: Alignment.bottomCenter, end: Alignment.topCenter);
