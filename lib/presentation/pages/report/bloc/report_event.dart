@@ -15,7 +15,7 @@ class GetDataReport extends ReportEvent {
 
   const GetDataReport({
     required this.startDate,
-    required this.endDate
-    required this.filterDate
+    required this.endDate,
+    required this.filterDate,
   });
 }

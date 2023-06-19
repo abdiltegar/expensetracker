@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:paml_20190140086_ewallet/config/color.dart';
 import 'package:paml_20190140086_ewallet/domain/helpers/date_formatter.dart';
 import 'package:paml_20190140086_ewallet/domain/models/report/report_model.dart';
@@ -19,6 +20,19 @@ class _ReportPageState extends State<ReportPage> {
   final _reportBloc = ReportBloc();
   final dateFormatter = DateFormatter();
 
+  final _startDateCtrl = TextEditingController();
+  final _endDateCtrl = TextEditingController();
+  final _filterDateCtrl = TextEditingController();
+
+  @override
+  void initState() {
+    var now = DateTime.now();
+    _startDateCtrl.text = DateFormat('yyyy-MM-dd').format(now);
+    _endDateCtrl.text = DateFormat('yyyy-MM-dd').format(now.subtract(const Duration(days: 30)));;
+    _filterDateCtrl.text = DateFormat('yyyy-MM-dd').format(now);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,12 +42,12 @@ class _ReportPageState extends State<ReportPage> {
       ),
       body: BlocProvider(
         create: (context) => _reportBloc..add(GetDataReport(
-          startDate: dateFormatter.dateFormatYMD(Timestamp.now()), 
+          _startDateCtrl.text, 
           endDate: dateFormatter.dateFormatYMD(Timestamp.fromDate(DateTime.now().subtract(const Duration(days: 30)))),
           filterDate: Timestamp.now()
         )),
         child: RefreshIndicator(
-          onRefresh: () async => _reportBloc..add(GetDataReport()),,
+          onRefresh: () async => _reportBloc..add(GetDataReport()),
           child: SafeArea(
             child: Container(
               height: double.infinity,
