@@ -98,6 +98,25 @@ class _LoginPageState extends State<LoginPage> {
                   (route) => false);
             }
           }
+          if(state is AuthError){
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text('Login Gagal'),
+                  content: Text(state.error),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                );
+              }
+            );
+          }
         },
         child: Scaffold(
           body: BlocBuilder<AuthBloc, AuthState>(

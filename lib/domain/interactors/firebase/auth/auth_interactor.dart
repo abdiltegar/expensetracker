@@ -37,11 +37,11 @@ class AuthInteractor {
       );
       res = AuthRegisterModel(status: true,message: 'Berhasil mendaftar', data: AuthRegisterData(
         uid: credential.user!.uid,
-        email: credential.user!.uid
+        email: credential.user!.email,
       ));
     } on FirebaseAuthException catch (e) {
       res = AuthRegisterModel(
-        status: true,
+        status: false,
         message: 'Gagal mendaftar',
         data: null
       );

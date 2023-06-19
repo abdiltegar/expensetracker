@@ -11,7 +11,7 @@ class ReportInitial extends ReportState {}
 
 class ReportLoading extends ReportState {}
 class ReportLoaded extends ReportState {
-  final List<ReportModel> data;
+  final ReportViewModel data;
 
   const ReportLoaded({
     required this.data

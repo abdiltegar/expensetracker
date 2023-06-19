@@ -38,9 +38,14 @@ class AuthRepository {
         'balance': 0
       };
 
+      debugPrint('-- user auth created --');
+
       await userInteractor.add(newUser);
 
+      debugPrint('-- user added --');
+
       setPreferences(registerRes.data!.uid, registerRes.data!.email, name);
+      debugPrint('-- preferences set --');
     }
 
     debugPrint(' -- Register Result : ${registerRes.toString()}');

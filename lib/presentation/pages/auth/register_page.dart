@@ -127,7 +127,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthBloc(),
+      create: (context) => _authBloc,
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           // TODO: implement listener
@@ -153,8 +153,26 @@ class _RegisterPageState extends State<RegisterPage> {
                   );
                 }
               );
-              
             }
+          }
+          if(state is AuthError){
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text('Register Gagal'),
+                  content: Text(state.error),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                );
+              }
+            );
           }
         },
         child: Scaffold(
@@ -215,7 +233,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 _buildInputRePassword(),
                                 const SizedBox(height: 10),
                                 ButtonScreen(
-                                  isLoading: (state is AuthLoginLoading) ? true : false,
+                                  isLoading: (state is AuthRegisterLoading) ? true : false,
                                   text: 'DAFTAR',
                                   action: () {
                                     if (_formRegisterKey.currentState!.validate()) {
