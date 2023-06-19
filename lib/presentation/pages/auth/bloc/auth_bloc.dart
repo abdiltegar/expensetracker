@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:paml_20190140086_ewallet/domain/models/auth/auth_login_model.dart';
 import 'package:paml_20190140086_ewallet/domain/models/auth/auth_register_model.dart';
@@ -28,10 +29,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthRegister>((event, emit) async {
       try {
         emit(AuthRegisterLoading());
+        debugPrint('-- call auth repository');
         final response = await authRepository.register(event.email, event.password, event.name);
-          
+        debugPrint('-- register to be loaded, response : ${response.toString()}');
         emit(AuthRegisterLoaded(response: response));
+        debugPrint('-- authRegisterLoaded');
       } catch (e) {
+        debugPrint('-- auth register error : ${e.toString()}');
         emit(AuthError(error: e.toString()));
       }
     });

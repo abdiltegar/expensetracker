@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paml_20190140086_ewallet/config/constant.dart';
+import 'package:paml_20190140086_ewallet/config/style.dart';
 
 class InputRePassword extends StatefulWidget {
   const InputRePassword({super.key, required this.prefixIcon, required this.labelText, required this.style, required this.controller, required this.passwordController});

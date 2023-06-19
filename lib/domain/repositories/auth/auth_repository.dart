@@ -15,7 +15,7 @@ class AuthRepository {
     if (loginRes.status) {
       debugPrint(' -- Going to get user -- ');
 
-      final userRes = await userInteractor.get(loginRes.data!.uid);
+      final userRes = await userInteractor.get(loginRes.data!.uid, email);
       debugPrint(' -- Get User Result : ${userRes.toString()}');
 
       if(userRes != null){
@@ -38,9 +38,14 @@ class AuthRepository {
         'balance': 0
       };
 
+      debugPrint('-- user auth created --');
+
       await userInteractor.add(newUser);
 
+      debugPrint('-- user added --');
+
       setPreferences(registerRes.data!.uid, registerRes.data!.email, name);
+      debugPrint('-- preferences set --');
     }
 
     debugPrint(' -- Register Result : ${registerRes.toString()}');
@@ -57,6 +62,6 @@ class AuthRepository {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('uid', uid);
     prefs.setString('email', email!);
-    prefs.setString('email', name!);
+    prefs.setString('name', name!);
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paml_20190140086_ewallet/config/constant.dart';
+import 'package:paml_20190140086_ewallet/config/style.dart';
 import 'package:paml_20190140086_ewallet/presentation/pages/auth/bloc/auth_bloc.dart';
 import 'package:paml_20190140086_ewallet/presentation/pages/auth/login_page.dart';
 import 'package:paml_20190140086_ewallet/presentation/pages/home_page.dart';
@@ -42,6 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
             validatorMessage: "Nama tidak boleh kosong",
             labelText: "Masukkan nama anda",
             style: 1,
+            keyboardType: TextInputType.text,
             controller: _nameCtrl)
       ],
     );
@@ -126,17 +127,52 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthBloc(),
+      create: (context) => _authBloc,
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           // TODO: implement listener
           if (state is AuthRegisterLoaded) {
             if (state.response.status) {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                  (route) => false);
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Pendaftaran berhasil'),
+                    content: const Text(''),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => const HomePage()),
+                            (route) => false);
+                        },
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  );
+                }
+              );
             }
+          }
+          if(state is AuthError){
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text('Register Gagal'),
+                  content: Text(state.error),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                );
+              }
+            );
           }
         },
         child: Scaffold(
@@ -159,7 +195,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       padding: const EdgeInsets.only(
                         left: 40,
                         right: 40,
-                        top: 100,
+                        top: 80,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -197,7 +233,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 _buildInputRePassword(),
                                 const SizedBox(height: 10),
                                 ButtonScreen(
-                                  isLoading: (state is AuthLoginLoading) ? true : false,
+                                  isLoading: (state is AuthRegisterLoading) ? true : false,
                                   text: 'DAFTAR',
                                   action: () {
                                     if (_formRegisterKey.currentState!.validate()) {
@@ -215,6 +251,15 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                           _buildSigninBtn(),
+                          const SizedBox(height: 20,),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const[
+                              Text('ExpenseTracker ©2023', style: displayFooterStyle,),
+                              Text('by Abdil Tegar Arifin', style: displayFooterStyle,),
+                            ],
+                          )
                         ],
                       ),
                     ),

@@ -5,19 +5,22 @@ import 'package:paml_20190140086_ewallet/domain/models/user/user_model.dart';
 
 class UserInteractor {
 
-  Future<UserModel?> get(String uid) async {
+  Future<UserModel?> get(String uid, email) async {
     try{
-      debugPrint('-- Get to get user at firestore');
 
       final data = await FirebaseFirestore.instance.collection('users')
       .where('uid', isEqualTo: uid)
       .limit(1).get();
 
-      debugPrint('-- uid : ${data.docs[0].data()['uid']}, name : ${data.docs[0].data()['name']}, balance : ${data.docs[0].data()['balance']}');
-
       if(data.docs.isNotEmpty){
 
-        UserModel res = UserModel(id: data.docs[0].id, uid: data.docs[0].data()['uid'], name: data.docs[0].data()['name'], balance: data.docs[0].data()['balance']);
+        UserModel res = UserModel(
+          id: data.docs[0].id, 
+          uid: data.docs[0].data()['uid'], 
+          name: data.docs[0].data()['name'], 
+          balance: data.docs[0].data()['balance'],
+          email: email
+        );
         debugPrint('-- res 5 -- ${res.toString()}');
 
         return res;      
