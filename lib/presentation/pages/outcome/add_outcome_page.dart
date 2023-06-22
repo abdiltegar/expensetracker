@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paml_20190140086_ewallet/config/color.dart';
-import 'package:paml_20190140086_ewallet/domain/models/transaction/transaction_model.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/outcome/bloc/outcome_bloc.dart';
-import 'package:paml_20190140086_ewallet/presentation/widgets/inputs/input_date.dart';
-import 'package:paml_20190140086_ewallet/presentation/widgets/inputs/input_text.dart';
+import 'package:expensetracker/config/color.dart';
+import 'package:expensetracker/domain/models/transaction/transaction_model.dart';
+import 'package:expensetracker/presentation/pages/outcome/bloc/outcome_bloc.dart';
+import 'package:expensetracker/presentation/widgets/inputs/input_date.dart';
+import 'package:expensetracker/presentation/widgets/inputs/input_text.dart';
 
 class AddOutcomePage extends StatefulWidget {
   const AddOutcomePage({super.key});

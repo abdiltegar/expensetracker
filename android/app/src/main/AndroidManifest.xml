@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.paml_20190140086_ewallet">
    <application
-        android:label="paml_20190140086_ewallet"
+        android:label="expensetracker"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:paml_20190140086_ewallet/domain/interactors/firebase/user/user_interactor.dart';
-import 'package:paml_20190140086_ewallet/domain/models/user/user_model.dart';
+import 'package:expensetracker/domain/interactors/firebase/user/user_interactor.dart';
+import 'package:expensetracker/domain/models/user/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileRepository {

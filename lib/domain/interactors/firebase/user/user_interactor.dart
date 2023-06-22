@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:paml_20190140086_ewallet/domain/models/user/user_model.dart';
+import 'package:expensetracker/domain/models/user/user_model.dart';
 
 class UserInteractor {
 

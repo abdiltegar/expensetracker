@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paml_20190140086_ewallet/config/color.dart';
-import 'package:paml_20190140086_ewallet/config/style.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/auth/bloc/auth_bloc.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/auth/register_page.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/home_page.dart';
-import 'package:paml_20190140086_ewallet/presentation/widgets/buttons/button_screen.dart';
-import 'package:paml_20190140086_ewallet/presentation/widgets/inputs/input_email.dart';
-import 'package:paml_20190140086_ewallet/presentation/widgets/inputs/input_password.dart';
+import 'package:expensetracker/config/color.dart';
+import 'package:expensetracker/config/style.dart';
+import 'package:expensetracker/presentation/pages/auth/bloc/auth_bloc.dart';
+import 'package:expensetracker/presentation/pages/auth/register_page.dart';
+import 'package:expensetracker/presentation/pages/home_page.dart';
+import 'package:expensetracker/presentation/widgets/buttons/button_screen.dart';
+import 'package:expensetracker/presentation/widgets/inputs/input_email.dart';
+import 'package:expensetracker/presentation/widgets/inputs/input_password.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:paml_20190140086_ewallet/domain/interactors/firebase/auth/auth_interactor.dart';
-import 'package:paml_20190140086_ewallet/domain/interactors/firebase/user/user_interactor.dart';
-import 'package:paml_20190140086_ewallet/domain/models/auth/auth_login_model.dart';
-import 'package:paml_20190140086_ewallet/domain/models/auth/auth_register_model.dart';
+import 'package:expensetracker/domain/interactors/firebase/auth/auth_interactor.dart';
+import 'package:expensetracker/domain/interactors/firebase/user/user_interactor.dart';
+import 'package:expensetracker/domain/models/auth/auth_login_model.dart';
+import 'package:expensetracker/domain/models/auth/auth_register_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {

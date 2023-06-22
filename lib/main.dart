@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/auth/login_page.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/home_page.dart';
+import 'package:expensetracker/presentation/pages/auth/login_page.dart';
+import 'package:expensetracker/presentation/pages/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';

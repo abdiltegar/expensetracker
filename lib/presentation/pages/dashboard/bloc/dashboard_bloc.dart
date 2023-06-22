@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:paml_20190140086_ewallet/domain/models/dashboard/dashboard_model.dart';
-import 'package:paml_20190140086_ewallet/domain/models/user/user_model.dart';
-import 'package:paml_20190140086_ewallet/domain/repositories/dashboard/dashboard_repository.dart';
+import 'package:expensetracker/domain/models/dashboard/dashboard_model.dart';
+import 'package:expensetracker/domain/models/user/user_model.dart';
+import 'package:expensetracker/domain/repositories/dashboard/dashboard_repository.dart';
 
 part 'dashboard_event.dart';
 part 'dashboard_state.dart';

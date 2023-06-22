@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paml_20190140086_ewallet/config/color.dart';
+import 'package:expensetracker/config/color.dart';
 
 final boxDecorationStyle = BoxDecoration(
   color: const Color(0xFF6CA8F1),

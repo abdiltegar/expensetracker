@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:paml_20190140086_ewallet/domain/models/auth/auth_login_model.dart';
-import 'package:paml_20190140086_ewallet/domain/models/auth/auth_register_model.dart';
-import 'package:paml_20190140086_ewallet/domain/repositories/auth/auth_repository.dart';
+import 'package:expensetracker/domain/models/auth/auth_login_model.dart';
+import 'package:expensetracker/domain/models/auth/auth_register_model.dart';
+import 'package:expensetracker/domain/repositories/auth/auth_repository.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

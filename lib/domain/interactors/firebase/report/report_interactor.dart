@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:paml_20190140086_ewallet/domain/models/report/report_model.dart';
+import 'package:expensetracker/domain/models/report/report_model.dart';
 
 class ReportInteractor {
 

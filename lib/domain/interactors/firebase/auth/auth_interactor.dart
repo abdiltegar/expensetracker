@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:paml_20190140086_ewallet/domain/models/auth/auth_login_model.dart';
-import 'package:paml_20190140086_ewallet/domain/models/auth/auth_register_model.dart';
+import 'package:expensetracker/domain/models/auth/auth_login_model.dart';
+import 'package:expensetracker/domain/models/auth/auth_register_model.dart';
 
 class AuthInteractor {
 

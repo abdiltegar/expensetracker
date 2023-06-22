@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:paml_20190140086_ewallet/domain/repositories/report/report_repository.dart';
+import 'package:expensetracker/domain/repositories/report/report_repository.dart';
 
 import '../../../../../domain/models/report/report_view_model.dart';
 

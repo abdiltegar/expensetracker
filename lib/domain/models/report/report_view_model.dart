@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:paml_20190140086_ewallet/domain/models/report/report_model.dart';
-import 'package:paml_20190140086_ewallet/domain/models/transaction/transaction_model.dart';
+import 'package:expensetracker/domain/models/report/report_model.dart';
+import 'package:expensetracker/domain/models/transaction/transaction_model.dart';
 
 class ReportViewModel {
   late final List<ReportModel> dailyReports;

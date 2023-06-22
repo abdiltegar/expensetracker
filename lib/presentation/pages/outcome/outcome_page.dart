@@ -4,11 +4,11 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:paml_20190140086_ewallet/config/style.dart';
-import 'package:paml_20190140086_ewallet/domain/helpers/date_formatter.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/outcome/add_outcome_page.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/outcome/bloc/outcome_bloc.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/outcome/edit_outcome_page.dart';
+import 'package:expensetracker/config/style.dart';
+import 'package:expensetracker/domain/helpers/date_formatter.dart';
+import 'package:expensetracker/presentation/pages/outcome/add_outcome_page.dart';
+import 'package:expensetracker/presentation/pages/outcome/bloc/outcome_bloc.dart';
+import 'package:expensetracker/presentation/pages/outcome/edit_outcome_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 import '../../../config/color.dart';
