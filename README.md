@@ -1,16 +1,21 @@
-# paml_20190140086_ewallet
+# ExpenseTracker
 
-A new Flutter project.
+ExpenseTracker adalah aplikasi yang digunakan untuk melakukan pencatatan keuangan pribadi. beberapa fitur yang ada di aplikasi ini antara lain :
+- Dashboard.
+    Menampilkan balance dan transaksi terbaru.
+- Pengelolaan Pemasukan.
+    Mengelola data pemasukan per hari, mulai dari menambahkan data pemasukan, mengedit data pemasukan, dan menghapus data pemasukan.
+- Pengelolaan Pengeluaran.
+    Mengelola data pengeluaran per hari, mulai dari menambahkan data pengeluaran, mengedit data pengeluaran, dan menghapus data pengeluaran.
+- Laporan.
+    Menampilkan grafik perbandingan pemasukan dan pengeluaran per-hari berdasarkan range tanggal, dan menampilkan rekap transaksi pada tanggal yang dipilih.
 
 ## Getting Started
+- Clone project
+- Install packages dan dependencies, dengan command `flutter pub get`
+- Run
 
-This project is a starting point for a Flutter application.
+## Dokumen
+- Use Case Diagram :
+- Flowchart Diagram :
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
