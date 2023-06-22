@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:paml_20190140086_ewallet/config/style.dart';
+import 'package:expensetracker/config/style.dart';
 
 class InputDate extends StatefulWidget {
   const InputDate({super.key, required this.validatorMessage, this.prefixIcon, required this.labelText, required this.keyboardType, required this.controller, this.style});

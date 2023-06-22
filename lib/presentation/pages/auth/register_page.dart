@@ -3,15 +3,15 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paml_20190140086_ewallet/config/style.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/auth/bloc/auth_bloc.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/auth/login_page.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/home_page.dart';
-import 'package:paml_20190140086_ewallet/presentation/widgets/buttons/button_screen.dart';
-import 'package:paml_20190140086_ewallet/presentation/widgets/inputs/input_email.dart';
-import 'package:paml_20190140086_ewallet/presentation/widgets/inputs/input_password.dart';
-import 'package:paml_20190140086_ewallet/presentation/widgets/inputs/input_repassword.dart';
-import 'package:paml_20190140086_ewallet/presentation/widgets/inputs/input_text.dart';
+import 'package:expensetracker/config/style.dart';
+import 'package:expensetracker/presentation/pages/auth/bloc/auth_bloc.dart';
+import 'package:expensetracker/presentation/pages/auth/login_page.dart';
+import 'package:expensetracker/presentation/pages/home_page.dart';
+import 'package:expensetracker/presentation/widgets/buttons/button_screen.dart';
+import 'package:expensetracker/presentation/widgets/inputs/input_email.dart';
+import 'package:expensetracker/presentation/widgets/inputs/input_password.dart';
+import 'package:expensetracker/presentation/widgets/inputs/input_repassword.dart';
+import 'package:expensetracker/presentation/widgets/inputs/input_text.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

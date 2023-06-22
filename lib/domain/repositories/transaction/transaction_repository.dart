@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:paml_20190140086_ewallet/domain/interactors/firebase/transaction/transaction_interactor.dart';
-import 'package:paml_20190140086_ewallet/domain/models/transaction/transaction_model.dart';
+import 'package:expensetracker/domain/interactors/firebase/transaction/transaction_interactor.dart';
+import 'package:expensetracker/domain/models/transaction/transaction_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TransactionRepository {

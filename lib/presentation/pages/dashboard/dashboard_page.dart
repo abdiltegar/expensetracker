@@ -4,12 +4,12 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:paml_20190140086_ewallet/config/style.dart';
-import 'package:paml_20190140086_ewallet/domain/helpers/date_formatter.dart';
-import 'package:paml_20190140086_ewallet/domain/models/dashboard/dashboard_model.dart';
-import 'package:paml_20190140086_ewallet/domain/models/transaction/transaction_model.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/dashboard/bloc/dashboard_bloc.dart';
-import 'package:paml_20190140086_ewallet/presentation/widgets/profile_pics/profile_pic.dart';
+import 'package:expensetracker/config/style.dart';
+import 'package:expensetracker/domain/helpers/date_formatter.dart';
+import 'package:expensetracker/domain/models/dashboard/dashboard_model.dart';
+import 'package:expensetracker/domain/models/transaction/transaction_model.dart';
+import 'package:expensetracker/presentation/pages/dashboard/bloc/dashboard_bloc.dart';
+import 'package:expensetracker/presentation/widgets/profile_pics/profile_pic.dart';
 
 import '../../../config/color.dart';
 

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:paml_20190140086_ewallet/config/color.dart';
-import 'package:paml_20190140086_ewallet/config/style.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/auth/bloc/auth_bloc.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/auth/login_page.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/profile/bloc/profile_bloc.dart';
-import 'package:paml_20190140086_ewallet/presentation/widgets/profile_pics/profile_pic.dart';
+import 'package:expensetracker/config/color.dart';
+import 'package:expensetracker/config/style.dart';
+import 'package:expensetracker/presentation/pages/auth/bloc/auth_bloc.dart';
+import 'package:expensetracker/presentation/pages/auth/login_page.dart';
+import 'package:expensetracker/presentation/pages/profile/bloc/profile_bloc.dart';
+import 'package:expensetracker/presentation/widgets/profile_pics/profile_pic.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

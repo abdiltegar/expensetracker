@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:paml_20190140086_ewallet/domain/models/transaction/transaction_model.dart';
+import 'package:expensetracker/domain/models/transaction/transaction_model.dart';
 
 class TransactionInteractor {
 

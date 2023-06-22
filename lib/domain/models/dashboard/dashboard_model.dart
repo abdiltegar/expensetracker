@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
-import 'package:paml_20190140086_ewallet/domain/models/transaction/transaction_model.dart';
-import 'package:paml_20190140086_ewallet/domain/models/user/user_model.dart';
+import 'package:expensetracker/domain/models/transaction/transaction_model.dart';
+import 'package:expensetracker/domain/models/user/user_model.dart';
 
 class DashboardModel {
   final UserModel? user;

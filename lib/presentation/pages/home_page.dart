@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:paml_20190140086_ewallet/config/color.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/dashboard/dashboard_page.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/income/income_page.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/outcome/outcome_page.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/profile/profile_page.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/report/report_page.dart';
+import 'package:expensetracker/config/color.dart';
+import 'package:expensetracker/presentation/pages/dashboard/dashboard_page.dart';
+import 'package:expensetracker/presentation/pages/income/income_page.dart';
+import 'package:expensetracker/presentation/pages/outcome/outcome_page.dart';
+import 'package:expensetracker/presentation/pages/profile/profile_page.dart';
+import 'package:expensetracker/presentation/pages/report/report_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class HomePage extends StatefulWidget {

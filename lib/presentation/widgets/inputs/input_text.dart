@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paml_20190140086_ewallet/config/style.dart';
+import 'package:expensetracker/config/style.dart';
 
 class InputText extends StatefulWidget {
   const InputText({super.key, required this.validatorMessage, this.prefixIcon, required this.labelText, required this.style, required this.keyboardType, required this.controller});

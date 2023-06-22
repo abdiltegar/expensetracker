@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paml_20190140086_ewallet/config/color.dart';
-import 'package:paml_20190140086_ewallet/config/style.dart';
+import 'package:expensetracker/config/color.dart';
+import 'package:expensetracker/config/style.dart';
 
 class ProfilePic extends StatefulWidget {
   const ProfilePic({super.key, required this.firstName, required this.backgroundColor, required this.textColor});

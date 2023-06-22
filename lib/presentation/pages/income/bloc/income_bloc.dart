@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:paml_20190140086_ewallet/domain/models/transaction/transaction_model.dart';
-import 'package:paml_20190140086_ewallet/domain/repositories/income/income_repository.dart';
-import 'package:paml_20190140086_ewallet/presentation/pages/dashboard/bloc/dashboard_bloc.dart';
+import 'package:expensetracker/domain/models/transaction/transaction_model.dart';
+import 'package:expensetracker/domain/repositories/income/income_repository.dart';
+import 'package:expensetracker/presentation/pages/dashboard/bloc/dashboard_bloc.dart';
 
 part 'income_event.dart';
 part 'income_state.dart';
