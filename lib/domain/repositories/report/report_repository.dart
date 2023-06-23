@@ -65,14 +65,14 @@ class ReportRepository{
         }
       }
 
-      return ReportViewModel(dailyReports: dailyReports, transactions: transactions, maxIncome: maxIncome, maxOutcome: maxOutcome, totalIncome: totalIncome, totalOutcome: totalOutcome);
+      return ReportViewModel(dailyReports: dailyReports, maxIncome: maxIncome, maxOutcome: maxOutcome, totalIncome: totalIncome, totalOutcome: totalOutcome);
     }catch(e){
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.clear();
     }
 
-    return ReportViewModel(dailyReports: [], transactions: [], maxIncome: 0, maxOutcome: 0, totalIncome: 0, totalOutcome: 0);
+    return ReportViewModel(dailyReports: [], maxIncome: 0, maxOutcome: 0, totalIncome: 0, totalOutcome: 0);
   }
 
 }

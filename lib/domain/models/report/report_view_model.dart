@@ -8,14 +8,12 @@ import 'package:expensetracker/domain/models/transaction/transaction_model.dart'
 
 class ReportViewModel {
   late final List<ReportModel> dailyReports;
-  late final List<TransactionModel> transactions;
   late final int maxIncome;
   late final int maxOutcome;
   late final int totalIncome;
   late final int totalOutcome;
   ReportViewModel({
     required this.dailyReports,
-    required this.transactions,
     required this.maxIncome,
     required this.maxOutcome,
     required this.totalIncome,
@@ -32,7 +30,6 @@ class ReportViewModel {
   }) {
     return ReportViewModel(
       dailyReports: dailyReports ?? this.dailyReports,
-      transactions: transactions ?? this.transactions,
       maxIncome: maxIncome ?? this.maxIncome,
       maxOutcome: maxOutcome ?? this.maxOutcome,
       totalIncome: totalIncome ?? this.totalIncome,
@@ -43,7 +40,6 @@ class ReportViewModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'dailyReports': dailyReports.map((x) => x.toMap()).toList(),
-      'transactions': transactions.map((x) => x.toMap()).toList(),
       'maxIncome': maxIncome,
       'maxOutcome': maxOutcome,
       'totalIncome': totalIncome,
@@ -54,7 +50,6 @@ class ReportViewModel {
   factory ReportViewModel.fromMap(Map<String, dynamic> map) {
     return ReportViewModel(
       dailyReports: List<ReportModel>.from((map['dailyReports'] as List<int>).map<ReportModel>((x) => ReportModel.fromMap(x as Map<String,dynamic>),),),
-      transactions: List<TransactionModel>.from((map['transactions'] as List<int>).map<TransactionModel>((x) => TransactionModel.fromMap(x as Map<String,dynamic>),),),
       maxIncome: map['maxIncome'] as int,
       maxOutcome: map['maxOutcome'] as int,
       totalIncome: map['totalIncome'] as int,
@@ -68,7 +63,7 @@ class ReportViewModel {
 
   @override
   String toString() {
-    return 'ReportViewModel(dailyReports: $dailyReports, transactions: $transactions, maxIncome: $maxIncome, maxOutcome: $maxOutcome, totalIncome: $totalIncome, totalOutcome: $totalOutcome)';
+    return 'ReportViewModel(dailyReports: $dailyReports, maxIncome: $maxIncome, maxOutcome: $maxOutcome, totalIncome: $totalIncome, totalOutcome: $totalOutcome)';
   }
 
   @override
@@ -77,7 +72,6 @@ class ReportViewModel {
   
     return 
       listEquals(other.dailyReports, dailyReports) &&
-      listEquals(other.transactions, transactions) &&
       other.maxIncome == maxIncome &&
       other.maxOutcome == maxOutcome &&
       other.totalIncome == totalIncome &&
@@ -87,7 +81,6 @@ class ReportViewModel {
   @override
   int get hashCode {
     return dailyReports.hashCode ^
-      transactions.hashCode ^
       maxIncome.hashCode ^
       maxOutcome.hashCode ^
       totalIncome.hashCode ^

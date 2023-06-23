@@ -11,6 +11,7 @@ import 'package:expensetracker/domain/helpers/date_formatter.dart';
 import 'package:expensetracker/domain/models/report/report_model.dart';
 import 'package:expensetracker/domain/models/transaction/transaction_model.dart';
 import 'package:expensetracker/presentation/pages/report/bloc/report_bloc.dart';
+import 'package:expensetracker/presentation/pages/report/bloc/transaction_recap_bloc.dart';
 import 'package:expensetracker/presentation/widgets/inputs/input_date.dart';
 import 'package:expensetracker/presentation/widgets/inputs/input_text.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -24,6 +25,8 @@ class ReportPage extends StatefulWidget {
 
 class _ReportPageState extends State<ReportPage> {
   final _reportBloc = ReportBloc();
+  final _recapBloc = TransactionRecapBloc();
+
   final dateFormatter = DateFormatter();
 
   final _startDateCtrl = TextEditingController();
@@ -34,9 +37,11 @@ class _ReportPageState extends State<ReportPage> {
 
   @override
   void initState() {
-    _startDateCtrl.text = DateFormat('yyyy-MM-dd').format(now.subtract(const Duration(days: 7)));
+    _startDateCtrl.text =
+        DateFormat('yyyy-MM-dd').format(now.subtract(const Duration(days: 7)));
     _endDateCtrl.text = DateFormat('yyyy-MM-dd').format(now);
-    _filterDateCtrl.text = DateFormat('yyyy-MM-dd').format(now.subtract(const Duration(days: 7)));
+    _filterDateCtrl.text =
+        DateFormat('yyyy-MM-dd').format(now.subtract(const Duration(days: 7)));
     super.initState();
   }
 
@@ -48,47 +53,57 @@ class _ReportPageState extends State<ReportPage> {
         backgroundColor: mainDarkBlue,
         title: const Text("Laporan"),
       ),
-      body: BlocProvider(
-        create: (context) => refreshData(),
-        child: RefreshIndicator(
-          onRefresh: () async => refreshData(),
-          child: SafeArea(
+      body: RefreshIndicator(
+        onRefresh: () async => refreshData(),
+        child: SafeArea(
             child: Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: const BoxDecoration(color: mainBackgroundWhite),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: BlocBuilder<ReportBloc, ReportState>(
-                  builder: (context, state) {
-                    if(state is ReportLoaded){
-                      int max = state.data.maxIncome > state.data.maxOutcome ? state.data.maxIncome : state.data.maxOutcome;
-                      debugPrint("report loaded, data : ${state.data.toString()}");
-                      return SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            _dailyReportCard(state.data.dailyReports, max),
-                            const SizedBox(height: 10,),
-                            _transactionCard(state.data.transactions),
-                            const SizedBox(height: 10,)
-                          ],
-                        ),
-                      );
-                    }else{
-                      return Column(
-                        children: [
-                          _dailyReportCard([], 0),
-                          const SizedBox(height: 10,),
-                          _transactionCard([])
-                        ],
-                      );
-                    }
-                  },
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(color: mainBackgroundWhite),
+          child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    BlocProvider(
+                      create: (context) => refreshDataReport(),
+                      child: BlocBuilder<ReportBloc, ReportState>(
+                        builder: (context, state) {
+                          if (state is ReportLoaded) {
+                            int max =
+                                state.data.maxIncome > state.data.maxOutcome
+                                    ? state.data.maxIncome
+                                    : state.data.maxOutcome;
+                            return _dailyReportCard(
+                                state.data.dailyReports, max);
+                          } else {
+                            return _dailyReportCard([], 0);
+                          }
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    BlocProvider(
+                      create: (context) => refreshDataRecap(),
+                      child: BlocBuilder<TransactionRecapBloc, TransactionRecapState>(
+                        builder: (context, state) {
+                          if (state is TransactionRecapLoaded) {
+                            return _transactionCard(state.data);
+                          } else {
+                            return _transactionCard([]);
+                          }
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    )
+                  ],
                 ),
-              ),
-            )
-          ),
-        ),
+              )),
+        )),
       ),
     );
   }
@@ -134,36 +149,53 @@ class _ReportPageState extends State<ReportPage> {
                     child: Form(
                       child: Row(
                         children: [
-                          Expanded(child: 
-                            Column(
+                          Expanded(
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 const Text("Mulai"),
-                                const SizedBox(height: 5,),
+                                const SizedBox(
+                                  height: 5,
+                                ),
                                 Expanded(
-                                  child: InputDate(validatorMessage: "-", labelText: "-", keyboardType: TextInputType.datetime, controller: _startDateCtrl, style: 2),
+                                  child: InputDate(
+                                      validatorMessage: "-",
+                                      labelText: "-",
+                                      keyboardType: TextInputType.datetime,
+                                      controller: _startDateCtrl,
+                                      style: 2),
                                 ),
                               ],
                             ),
                           ),
-                          const SizedBox(width: 10,),
-                          Expanded(child: 
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                const Text("Sampai"),
-                                const SizedBox(height: 5,),
-                                Expanded(
-                                  child: InputDate(validatorMessage: "-", labelText: "-", keyboardType: TextInputType.datetime, controller: _endDateCtrl, style: 2),
-                                ),
-                              ],
-                            )
+                          const SizedBox(
+                            width: 10,
                           ),
-                          const SizedBox(width: 10,),
+                          Expanded(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Text("Sampai"),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Expanded(
+                                child: InputDate(
+                                    validatorMessage: "-",
+                                    labelText: "-",
+                                    keyboardType: TextInputType.datetime,
+                                    controller: _endDateCtrl,
+                                    style: 2),
+                              ),
+                            ],
+                          )),
+                          const SizedBox(
+                            width: 10,
+                          ),
                           IconButton(
-                            onPressed: () async => refreshData(), 
+                            onPressed: () async => refreshDataReport(),
                             icon: const Icon(CupertinoIcons.search_circle_fill),
                             color: mainDarkBlue,
                           )
@@ -172,34 +204,44 @@ class _ReportPageState extends State<ReportPage> {
                     ),
                   ),
                   SfCartesianChart(
-                    primaryXAxis: CategoryAxis(),
-                    primaryYAxis: NumericAxis(minimum: 0, maximum: max.toDouble(), interval: 500000),
-                    tooltipBehavior: _tooltip,
-                    series: <ChartSeries<ReportModel, String>>[
-                      ColumnSeries<ReportModel, String>(
-                          dataSource: reports,
-                          xValueMapper: (ReportModel data, _) => data.date,
-                          yValueMapper: (ReportModel data, _) => data.income,
-                          name: 'Pemasukan',
-                          gradient: gradientGreenStyle
-                      ),
-                      ColumnSeries<ReportModel, String>(
-                          dataSource: reports,
-                          xValueMapper: (ReportModel data, _) => data.date,
-                          yValueMapper: (ReportModel data, _) => data.outcome,
-                          name: 'Pengeluaran',
-                          gradient: gradientRedStyle
-                      )
-                    ]
-                  ),
+                      primaryXAxis: CategoryAxis(),
+                      primaryYAxis: NumericAxis(
+                          minimum: 0,
+                          maximum: max.toDouble(),
+                          interval: 500000),
+                      tooltipBehavior: _tooltip,
+                      series: <ChartSeries<ReportModel, String>>[
+                        ColumnSeries<ReportModel, String>(
+                            dataSource: reports,
+                            xValueMapper: (ReportModel data, _) => data.date,
+                            yValueMapper: (ReportModel data, _) => data.income,
+                            name: 'Pemasukan',
+                            gradient: gradientGreenStyle),
+                        ColumnSeries<ReportModel, String>(
+                            dataSource: reports,
+                            xValueMapper: (ReportModel data, _) => data.date,
+                            yValueMapper: (ReportModel data, _) => data.outcome,
+                            name: 'Pengeluaran',
+                            gradient: gradientRedStyle)
+                      ]),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(height: 10, width: 10, decoration: const BoxDecoration(gradient: gradientGreenStyle),),
+                      Container(
+                        height: 10,
+                        width: 10,
+                        decoration:
+                            const BoxDecoration(gradient: gradientGreenStyle),
+                      ),
                       const Text(" Pemasukan "),
-                      const SizedBox(width:20),
-                      Container(height: 10, width: 10, decoration: const BoxDecoration(gradient: gradientRedStyle),),
+                      const SizedBox(width: 20),
+                      Container(
+                        height: 10,
+                        width: 10,
+                        decoration:
+                            const BoxDecoration(gradient: gradientRedStyle),
+                      ),
                       const Text(" Pengeluaran "),
                     ],
                   ),
@@ -212,7 +254,7 @@ class _ReportPageState extends State<ReportPage> {
     );
   }
 
-  Widget _transactionCard(List<TransactionModel> transactions){
+  Widget _transactionCard(List<TransactionModel> transactions) {
     return Card(
       elevation: 1,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -248,22 +290,31 @@ class _ReportPageState extends State<ReportPage> {
                 child: Form(
                   child: Row(
                     children: [
-                      Expanded(child: 
-                        Column(
+                      Expanded(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             const Text("Transaksi pada "),
-                            const SizedBox(height: 5,),
+                            const SizedBox(
+                              height: 5,
+                            ),
                             Expanded(
-                              child: InputDate(validatorMessage: "-", labelText: "-", keyboardType: TextInputType.datetime, controller: _filterDateCtrl, style: 2),
+                              child: InputDate(
+                                  validatorMessage: "-",
+                                  labelText: "-",
+                                  keyboardType: TextInputType.datetime,
+                                  controller: _filterDateCtrl,
+                                  style: 2),
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(width: 10,),
+                      const SizedBox(
+                        width: 10,
+                      ),
                       IconButton(
-                        onPressed: () async => refreshData(), 
+                        onPressed: () async => refreshDataRecap(),
                         icon: const Icon(CupertinoIcons.search_circle_fill),
                         color: mainDarkBlue,
                       )
@@ -286,7 +337,12 @@ class _ReportPageState extends State<ReportPage> {
     );
   }
 
-  ReportBloc refreshData(){
+  refreshData(){
+    refreshDataReport();
+    refreshDataRecap();
+  }
+
+  ReportBloc refreshDataReport() {
     debugPrint("refreshing");
     return _reportBloc
       ..add(GetDataReport(
@@ -298,28 +354,38 @@ class _ReportPageState extends State<ReportPage> {
               Timestamp.fromDate(DateTime.parse(_filterDateCtrl.text))));
   }
 
+  TransactionRecapBloc refreshDataRecap() {
+    debugPrint("refreshing");
+    return _recapBloc
+      ..add(GetDataTransactionRecap(
+          filterDate:
+              Timestamp.fromDate(DateTime.parse(_filterDateCtrl.text))));
+  }
+
   Widget _transactionItemCard(TransactionModel transaction) {
     return Card(
       margin: const EdgeInsets.all(10),
       color: Colors.white,
       child: ListTile(
-        title: RichText(
-          text: TextSpan(children: [
-            TextSpan(
-              text: dateFormatter.dateFormatYMD(transaction.trxDate), 
-              style: const TextStyle(color: Colors.grey)
-            ),
-            TextSpan(
-              text: "\n${transaction.description}",
-              style: const TextStyle(color: Colors.black),
-            )
-          ]),
-        ),
-        trailing: Text(
-          transaction.isIncome ? NumberFormat.simpleCurrency(locale: 'id').format(transaction.amount) : '- ${NumberFormat.simpleCurrency(locale: 'id').format(transaction.amount)}',
-          style: transaction.isIncome ? incomeNumberStyle : outcomeNumberStyle,
-        )
-      ),
+          title: RichText(
+            text: TextSpan(children: [
+              TextSpan(
+                  text: dateFormatter.dateFormatYMD(transaction.trxDate),
+                  style: const TextStyle(color: Colors.grey)),
+              TextSpan(
+                text: "\n${transaction.description}",
+                style: const TextStyle(color: Colors.black),
+              )
+            ]),
+          ),
+          trailing: Text(
+            transaction.isIncome
+                ? NumberFormat.simpleCurrency(locale: 'id')
+                    .format(transaction.amount)
+                : '- ${NumberFormat.simpleCurrency(locale: 'id').format(transaction.amount)}',
+            style:
+                transaction.isIncome ? incomeNumberStyle : outcomeNumberStyle,
+          )),
     );
   }
 }
