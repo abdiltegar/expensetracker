@@ -153,26 +153,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   );
                 }
               );
+            }else{
+              showDialogError(state.response.message);
             }
           }
           if(state is AuthError){
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text('Register Gagal'),
-                  content: Text(state.error),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        
-                      },
-                      child: const Text('OK'),
-                    ),
-                  ],
-                );
-              }
-            );
+            showDialogError(state.error);
           }
         },
         child: Scaffold(
@@ -270,6 +256,26 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
       ),
+    );
+  }
+
+  showDialogError(String message){
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Login Gagal'),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop('dialog');
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      }
     );
   }
 }

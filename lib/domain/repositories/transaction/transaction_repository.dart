@@ -6,11 +6,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 class TransactionRepository {
   final transactionInteractor = TransactionInteractor();
   
-  Future<List<TransactionModel>> getByDate(String date) async {
+  Future<List<TransactionModel>> getByDate(Timestamp date) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     try{
-      return await transactionInteractor.getByDate(prefs.getString('uid')!, Timestamp.fromDate(DateTime.parse(date))); 
+      return await transactionInteractor.getByDate(prefs.getString('uid')!, date); 
     }catch(e){
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
