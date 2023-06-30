@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:expensetracker/domain/models/chart/chart_model.dart';
+import 'package:expensetracker/domain/models/report/report_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -70,14 +72,10 @@ class _ReportPageState extends State<ReportPage> {
                       child: BlocBuilder<ReportBloc, ReportState>(
                         builder: (context, state) {
                           if (state is ReportLoaded) {
-                            int max =
-                                state.data.maxIncome > state.data.maxOutcome
-                                    ? state.data.maxIncome
-                                    : state.data.maxOutcome;
-                            return _dailyReportCard(
-                                state.data.dailyReports, max);
+                            
+                            return _dailyReportCard(state.data);
                           } else {
-                            return _dailyReportCard([], 0);
+                            return _dailyReportCard(ReportViewModel(dailyReports: [], maxIncome: 0, maxOutcome: 0, totalIncome: 0, totalOutcome: 0));
                           }
                         },
                       ),
@@ -108,9 +106,9 @@ class _ReportPageState extends State<ReportPage> {
     );
   }
 
-  Widget _dailyReportCard(List<ReportModel> reports, int max) {
-    debugPrint('debug reports : ${reports.toString()}');
-    final _tooltip = TooltipBehavior();
+  Widget _dailyReportCard(ReportViewModel reportView) {
+    debugPrint('debug reportViews : ${reportView.toString()}');
+    int max = reportView.maxIncome > reportView.maxOutcome ? reportView.maxIncome : reportView.maxOutcome;
 
     return Card(
       elevation: 1,
@@ -203,27 +201,9 @@ class _ReportPageState extends State<ReportPage> {
                       ),
                     ),
                   ),
-                  SfCartesianChart(
-                      primaryXAxis: CategoryAxis(),
-                      primaryYAxis: NumericAxis(
-                          minimum: 0,
-                          maximum: max.toDouble(),
-                          interval: 500000),
-                      tooltipBehavior: _tooltip,
-                      series: <ChartSeries<ReportModel, String>>[
-                        ColumnSeries<ReportModel, String>(
-                            dataSource: reports,
-                            xValueMapper: (ReportModel data, _) => data.date,
-                            yValueMapper: (ReportModel data, _) => data.income,
-                            name: 'Pemasukan',
-                            gradient: gradientGreenStyle),
-                        ColumnSeries<ReportModel, String>(
-                            dataSource: reports,
-                            xValueMapper: (ReportModel data, _) => data.date,
-                            yValueMapper: (ReportModel data, _) => data.outcome,
-                            name: 'Pengeluaran',
-                            gradient: gradientRedStyle)
-                      ]),
+                  _chartBar(max, reportView.dailyReports),
+                  const SizedBox(height: 10,),
+                  _chartPie(reportView.totalIncome, reportView.totalOutcome),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -252,6 +232,57 @@ class _ReportPageState extends State<ReportPage> {
         ),
       ),
     );
+  }
+
+  Widget _chartBar(int max, List<ReportModel> reports){
+    final _tooltip = TooltipBehavior();
+    
+    return SfCartesianChart(
+      primaryXAxis: CategoryAxis(),
+      primaryYAxis: NumericAxis(
+          minimum: 0,
+          maximum: max.toDouble(),
+          interval: 500000),
+      tooltipBehavior: _tooltip,
+      series: <ChartSeries<ReportModel, String>>[
+        ColumnSeries<ReportModel, String>(
+            dataSource: reports,
+            xValueMapper: (ReportModel data, _) => data.date,
+            yValueMapper: (ReportModel data, _) => data.income,
+            name: 'Pemasukan',
+            gradient: gradientGreenStyle),
+        ColumnSeries<ReportModel, String>(
+            dataSource: reports,
+            xValueMapper: (ReportModel data, _) => data.date,
+            yValueMapper: (ReportModel data, _) => data.outcome,
+            name: 'Pengeluaran',
+            gradient: gradientRedStyle)
+      ]);
+  }
+
+  Widget _chartPie(int income, int outcome){
+
+    final List<ChartModel> chartData = [
+      ChartModel('Income', income.toDouble(), Colors.green),
+      ChartModel('Outcome', outcome.toDouble(), Colors.red)
+    ];
+
+    if(!(income == 0 && outcome == 0)){
+      return SfCircularChart(
+        series: <CircularSeries>[
+          // Render pie chart
+          PieSeries<ChartModel, String>(
+            dataSource: chartData,
+            pointColorMapper:(ChartModel data,  _) => data.color,
+            xValueMapper: (ChartModel data, _) => data.x,
+            yValueMapper: (ChartModel data, _) => data.y
+          )
+        ]
+      );
+    }else{
+      return const Text("");
+    }
+    
   }
 
   Widget _transactionCard(List<TransactionModel> transactions) {

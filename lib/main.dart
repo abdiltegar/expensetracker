@@ -3,11 +3,16 @@ import 'package:expensetracker/presentation/pages/auth/login_page.dart';
 import 'package:expensetracker/presentation/pages/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Future.delayed(const Duration(seconds: 1));
+  FlutterNativeSplash.remove();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

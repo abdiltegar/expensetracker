@@ -129,15 +129,10 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          const Text(
-                            "Expense\nTracker",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'OpenSans',
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            textAlign: TextAlign.center,
+                          const Image(
+                            image: AssetImage("assets/img/logo4.png"),
+                            width: 100,
+                            height: 100,
                           ),
                           const SizedBox(height: 40),
                           const Text(
