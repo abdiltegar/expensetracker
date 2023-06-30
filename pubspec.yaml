@@ -44,6 +44,7 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   intl: ^0.18.1
   syncfusion_flutter_charts: 20.4.54
+  flutter_native_splash: ^2.2.19
 
 dev_dependencies:
   flutter_test:
@@ -71,8 +72,8 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-  # assets:
-  #   - img/
+  assets:
+    - assets/img/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -99,3 +100,11 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+  color: "#398AE5"
+  # background_image: "assets/splash.png"
+  image: "assets/splash.png"
