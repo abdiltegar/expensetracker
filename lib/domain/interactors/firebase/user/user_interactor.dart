@@ -21,7 +21,6 @@ class UserInteractor {
           balance: data.docs[0].data()['balance'],
           email: email
         );
-        debugPrint('-- res 5 -- ${res.toString()}');
 
         return res;      
       }

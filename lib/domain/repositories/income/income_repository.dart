@@ -1,12 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:expensetracker/domain/helpers/date_formatter.dart';
 import 'package:expensetracker/domain/interactors/firebase/report/report_interactor.dart';
 import 'package:expensetracker/domain/interactors/firebase/transaction/transaction_interactor.dart';
 import 'package:expensetracker/domain/interactors/firebase/user/user_interactor.dart';
-import 'package:expensetracker/domain/models/report/report_model.dart';
 import 'package:expensetracker/domain/models/transaction/transaction_model.dart';
-import 'package:expensetracker/domain/models/user/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IncomeRepository {
@@ -32,8 +28,6 @@ class IncomeRepository {
       trxDate: payload.trxDate, 
       description: payload.description
     );
-
-    debugPrint("data incom to be send to interactor");
 
     final newIncome = <String, dynamic>{
       'user_id': data.userId,

@@ -15,7 +15,6 @@ import 'package:expensetracker/domain/models/transaction/transaction_model.dart'
 import 'package:expensetracker/presentation/pages/report/bloc/report_bloc.dart';
 import 'package:expensetracker/presentation/pages/report/bloc/transaction_recap_bloc.dart';
 import 'package:expensetracker/presentation/widgets/inputs/input_date.dart';
-import 'package:expensetracker/presentation/widgets/inputs/input_text.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class ReportPage extends StatefulWidget {
@@ -107,7 +106,6 @@ class _ReportPageState extends State<ReportPage> {
   }
 
   Widget _dailyReportCard(ReportViewModel reportView) {
-    debugPrint('debug reportViews : ${reportView.toString()}');
     int max = reportView.maxIncome > reportView.maxOutcome ? reportView.maxIncome : reportView.maxOutcome;
 
     return Card(
@@ -374,7 +372,6 @@ class _ReportPageState extends State<ReportPage> {
   }
 
   ReportBloc refreshDataReport() {
-    debugPrint("refreshing");
     return _reportBloc
       ..add(GetDataReport(
           startDate: dateFormatter.dateFormatYMD(
@@ -386,7 +383,6 @@ class _ReportPageState extends State<ReportPage> {
   }
 
   TransactionRecapBloc refreshDataRecap() {
-    debugPrint("refreshing");
     return _recapBloc
       ..add(GetDataTransactionRecap(
           filterDate:

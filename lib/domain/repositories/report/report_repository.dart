@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:expensetracker/domain/helpers/date_formatter.dart';
 import 'package:expensetracker/domain/interactors/firebase/report/report_interactor.dart';
 import 'package:expensetracker/domain/interactors/firebase/transaction/transaction_interactor.dart';
 import 'package:expensetracker/domain/models/report/report_model.dart';
 import 'package:expensetracker/domain/models/report/report_view_model.dart';
-import 'package:expensetracker/domain/models/transaction/transaction_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ReportRepository{
@@ -16,9 +14,7 @@ class ReportRepository{
   Future<ReportViewModel> getByRangeDate(String startDate, String endDate, Timestamp filterDate) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    debugPrint('-- filter date : ${DateTime.fromMicrosecondsSinceEpoch(filterDate.microsecondsSinceEpoch)}');
     try{
-      var transactions = await transactionInteractor.getByDate(prefs.getString('uid')!, filterDate);
 
       List<ReportModel> dailyReports = [];
       final daysToGenerate = DateTime.parse(endDate).difference(DateTime.parse(startDate)).inDays;

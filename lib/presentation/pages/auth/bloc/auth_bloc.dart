@@ -29,13 +29,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthRegister>((event, emit) async {
       try {
         emit(AuthRegisterLoading());
-        debugPrint('-- call auth repository');
+
         final response = await authRepository.register(event.email, event.password, event.name);
-        debugPrint('-- register to be loaded, response : ${response.toString()}');
+        
         emit(AuthRegisterLoaded(response: response));
-        debugPrint('-- authRegisterLoaded');
+
       } catch (e) {
-        debugPrint('-- auth register error : ${e.toString()}');
         emit(AuthError(error: e.toString()));
       }
     });
