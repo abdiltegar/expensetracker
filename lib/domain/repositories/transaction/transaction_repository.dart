@@ -19,4 +19,18 @@ class TransactionRepository {
 
     return [];
   }
+
+  Future<List<TransactionModel>> getLatest() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    try{
+      return await transactionInteractor.getLatest(prefs.getString('uid')!); 
+    }catch(e){
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.clear();
+    }
+
+    return [];
+  }
 }

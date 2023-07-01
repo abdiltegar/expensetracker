@@ -11,12 +11,10 @@ class AuthRepository {
 
   Future<AuthLoginModel> login(String email, String password) async {
     final loginRes = await authInteractor.login(email, password);
-    debugPrint(' -- Login Result : ${loginRes.toString()}');
+    
     if (loginRes.status) {
-      debugPrint(' -- Going to get user -- ');
 
       final userRes = await userInteractor.get(loginRes.data!.uid, email);
-      debugPrint(' -- Get User Result : ${userRes.toString()}');
 
       if(userRes != null){
         setPreferences(loginRes.data!.uid, loginRes.data!.email, userRes.name);
@@ -37,18 +35,12 @@ class AuthRepository {
         'name': name,
         'balance': 0
       };
-
-      debugPrint('-- user auth created --');
-
+      
       await userInteractor.add(newUser);
 
-      debugPrint('-- user added --');
-
       setPreferences(registerRes.data!.uid, registerRes.data!.email, name);
-      debugPrint('-- preferences set --');
     }
-
-    debugPrint(' -- Register Result : ${registerRes.toString()}');
+    
     return registerRes;
   }
 

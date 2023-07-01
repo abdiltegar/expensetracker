@@ -100,7 +100,6 @@ class TransactionInteractor {
   Future<TransactionModel?> getById(String id) async {
 
     try{
-      debugPrint('-- going to get trx');
       
       final data = await FirebaseFirestore.instance.collection('transactions')
       .doc(id)
@@ -130,7 +129,6 @@ class TransactionInteractor {
     List<TransactionModel> res = [];
 
     try{
-      debugPrint('-- going to get trx by date');
       
       final data = await FirebaseFirestore.instance.collection('transactions')
       .where('user_id', isEqualTo:userId)

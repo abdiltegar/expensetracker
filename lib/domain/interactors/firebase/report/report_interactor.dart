@@ -49,7 +49,6 @@ class ReportInteractor {
           income: data.docs[0].data()['income'],
           outcome: data.docs[0].data()['outcome'],
         );
-        debugPrint('-- res 5 -- ${res.toString()}');
 
         return res;      
       }
